@@ -112,6 +112,7 @@ let sceneFrame = 0;
 function updateScrollScenes() {
   sceneFrame = 0;
   const height = window.innerHeight || 1;
+  const clamp01 = (value) => Math.max(0, Math.min(1, value));
   let activeScene = 0;
   let activeProgress = 0;
   sections.forEach((scene, index) => {
@@ -119,35 +120,61 @@ function updateScrollScenes() {
     const progressInScene = Math.max(0, Math.min(1, (height - bounds.top) / (height + bounds.height)));
     const motionPhase = reduceMotion.matches ? 0 : progressInScene - .5;
     scene.style.setProperty('--scene-progress', progressInScene.toFixed(3));
+    scene.style.setProperty('--scene-width', `${(progressInScene * 100).toFixed(2)}%`);
     if (scene.id === 'about') {
       scene.querySelector('.about-art')?.style.setProperty('--about-art-lift', `${(-motionPhase * 18).toFixed(2)}px`);
       scene.querySelector('.signal-ring-three')?.style.setProperty('--about-orbit', `${(motionPhase * 46).toFixed(2)}deg`);
+      scene.querySelector('.about-signal')?.style.setProperty('--about-art-turn', `${(motionPhase * 9).toFixed(2)}deg`);
+      scene.querySelector('.about-signal')?.style.setProperty('--signal-dash', (1 - progressInScene).toFixed(3));
+      scene.querySelector('.signal-node')?.style.setProperty('--signal-scale', (reduceMotion.matches ? 1 : .78 + progressInScene * .3).toFixed(3));
+      scene.querySelector('.about-art-index')?.style.setProperty('--about-label-spacing', `${(.1 + progressInScene * .04).toFixed(3)}em`);
     }
     if (scene.id === 'skills') {
+      let wordIndex = 0;
       scene.querySelectorAll('.skill-group').forEach((group, item) => {
         const direction = item % 2 ? 1 : -1;
         group.style.setProperty('--skill-shift', `${(-direction * motionPhase * 20).toFixed(2)}px`);
         group.style.setProperty('--skill-tilt', `${(-direction * motionPhase * 8).toFixed(2)}deg`);
+        group.querySelectorAll('.skill-word').forEach((word) => {
+          const reveal = reduceMotion.matches ? 1 : clamp01((progressInScene - wordIndex * .035) / .42);
+          word.style.setProperty('--word-opacity', reveal.toFixed(3));
+          word.style.setProperty('--word-lift', `${((1 - reveal) * 17).toFixed(2)}px`);
+          word.style.setProperty('--word-angle', `${((1 - reveal) * 14).toFixed(2)}deg`);
+          word.style.setProperty('--word-cut', `${((1 - reveal) * 100).toFixed(2)}%`);
+          wordIndex += 1;
+        });
       });
     }
     if (scene.id === 'work') {
       scene.querySelectorAll('.project-preview').forEach((preview, item) => {
         const direction = item % 2 ? 1 : -1;
-        preview.style.setProperty('--work-lift', `${(-motionPhase * 24).toFixed(2)}px`);
+        const reveal = reduceMotion.matches ? 1 : clamp01((progressInScene - item * .14) / .48);
+        preview.style.setProperty('--work-lift', `${((1 - reveal) * 34 - motionPhase * 18).toFixed(2)}px`);
         preview.style.setProperty('--work-tilt', `${(-direction * motionPhase * 7).toFixed(2)}deg`);
+        preview.style.setProperty('--work-cut', `${((1 - reveal) * 100).toFixed(2)}%`);
+        preview.style.setProperty('--work-opacity', reveal.toFixed(3));
+        preview.style.setProperty('--work-image-scale', (1 + (1 - reveal) * .055).toFixed(3));
+        preview.closest('.project')?.style.setProperty('--project-meta-shift', `${((1 - reveal) * 24).toFixed(2)}px`);
       });
     }
     if (scene.id === 'process') {
       scene.querySelectorAll('.process-list li').forEach((step, item) => {
         const direction = item % 2 ? 1 : -1;
-        step.style.setProperty('--step-shift', `${(-direction * motionPhase * 14).toFixed(2)}px`);
-        step.style.setProperty('--step-turn', `${(-direction * motionPhase * 5).toFixed(2)}deg`);
+        const reveal = reduceMotion.matches ? 1 : clamp01((progressInScene - item * .11) / .42);
+        step.style.setProperty('--step-shift', `${(-direction * motionPhase * 14 + (1 - reveal) * direction * 24).toFixed(2)}px`);
+        step.style.setProperty('--step-turn', `${(-direction * motionPhase * 5 + (1 - reveal) * direction * 9).toFixed(2)}deg`);
+        step.style.setProperty('--step-opacity', reveal.toFixed(3));
+        step.style.setProperty('--step-line', `${(reveal * 100).toFixed(2)}%`);
+        step.style.setProperty('--step-glow', (reveal * .12).toFixed(3));
       });
     }
     if (scene.id === 'contact') {
       scene.querySelectorAll('.contact-option').forEach((option, item) => {
         const direction = item % 2 ? -1 : 1;
-        option.style.setProperty('--contact-shift', `${(-direction * motionPhase * 18).toFixed(2)}px`);
+        const reveal = reduceMotion.matches ? 1 : clamp01((progressInScene - item * .12) / .4);
+        option.style.setProperty('--contact-shift', `${(-direction * motionPhase * 18 + (1 - reveal) * direction * 36).toFixed(2)}px`);
+        option.style.setProperty('--contact-opacity', reveal.toFixed(3));
+        option.style.setProperty('--contact-cut', `${((1 - reveal) * 100).toFixed(2)}%`);
       });
     }
     if (bounds.top <= height * .55 && bounds.bottom > height * .55) {
