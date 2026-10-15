@@ -1,4 +1,5 @@
 import { translations } from './translations.js';
+import { mountHeroMotion } from './hero-motion.js';
 
 const root = document.documentElement;
 const body = document.body;
@@ -31,6 +32,7 @@ function setLanguage(next, persist = true) {
   langButton.innerHTML = next === 'en' ? 'AR <span>/</span> EN' : 'EN <span>/</span> AR';
   langButton.setAttribute('aria-label', next === 'en' ? 'Switch to Arabic' : 'التبديل إلى الإنجليزية');
   document.title = next === 'en' ? 'Marco Milad — Front-end Developer' : 'ماركو ميلاد — مطور واجهات أمامية';
+  document.dispatchEvent(new CustomEvent('portfolio:languagechange', { detail: { language: next } }));
   if (persist) { try { localStorage.setItem('portfolio-language', next); } catch (_) { /* Continue without persistence. */ } }
   requestAnimationFrame(() => {
     window.scrollTo({ top: currentY, behavior: 'instant' });
@@ -205,46 +207,12 @@ window.addEventListener('scroll', requestSceneFrame, { passive: true });
 window.addEventListener('resize', requestSceneFrame, { passive: true });
 updateScrollScenes();
 document.getElementById('current-year').textContent = new Date().getFullYear();
-body.classList.add('is-entered');
+mountHeroMotion({ root, body });
+document.addEventListener('portfolio:languagechange', () => mountHeroMotion({ root, body }));
 
 document.addEventListener('visibilitychange', () => {
   body.classList.toggle('page-hidden', document.hidden);
 });
-
-const hero = document.querySelector('.hero');
-const heroVisual = document.querySelector('.hero-visual');
-const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
-if (hero && heroVisual && finePointer.matches && !reduceMotion.matches) {
-  let frame = 0;
-  const parallaxLayers = [
-    { element: hero.querySelector('.hero-grid'), factor: -7 },
-    { element: heroVisual, factor: 10 },
-    { element: hero.querySelector('.code-window'), factor: -7 },
-    { element: hero.querySelector('.hero-tech-floats'), factor: 13 }
-  ].filter((layer) => layer.element);
-  hero.addEventListener('pointermove', (event) => {
-    if (reduceMotion.matches) return;
-    if (frame) return;
-    frame = requestAnimationFrame(() => {
-      const bounds = hero.getBoundingClientRect();
-      const x = (event.clientX - bounds.left) / bounds.width - .5;
-      const y = (event.clientY - bounds.top) / bounds.height - .5;
-      parallaxLayers.forEach(({ element, factor }) => {
-        element.style.setProperty('--parallax-x', `${(x * factor).toFixed(2)}px`);
-        element.style.setProperty('--parallax-y', `${(y * factor).toFixed(2)}px`);
-      });
-      frame = 0;
-    });
-  }, { passive: true });
-  hero.addEventListener('pointerleave', () => {
-    if (frame) cancelAnimationFrame(frame);
-    frame = 0;
-    parallaxLayers.forEach(({ element }) => {
-      element.style.removeProperty('--parallax-x');
-      element.style.removeProperty('--parallax-y');
-    });
-  }, { passive: true });
-}
 
 const copyTimers = new WeakMap();
 async function copyValue(value) {

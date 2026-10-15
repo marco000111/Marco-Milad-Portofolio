@@ -4,7 +4,7 @@ html { scroll-behavior: smooth; }
 #about, #skills, #work, #process, #contact { position: relative; }
 #about::before, #skills::before, #work::before, #process::before, #contact::before {
   content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 1px;
-  background: linear-gradient(90deg,transparent,rgba(232,237,242,.2) 20%,rgba(255,104,78,.58) 50%,rgba(232,237,242,.2) 80%,transparent);
+  background: linear-gradient(90deg,transparent,rgba(232,237,242,.2) 20%,rgba(60,145,255,.52) 50%,rgba(232,237,242,.2) 80%,transparent);
   transform: scaleX(var(--scene-progress,.15)); transform-origin: left center; opacity: .65;
 }
 .section-heading h2 { will-change: clip-path, opacity; }
@@ -14,7 +14,7 @@ html { scroll-behavior: smooth; }
 #about .about-art { transform: translate3d(0,var(--about-art-lift,0px),0); transform-style: preserve-3d; }
 #about .about-signal { transform: perspective(1100px) rotateY(var(--about-art-turn,0deg)); transform-origin: center; }
 #about .signal-ring-three { transform: rotate(calc(48deg + var(--about-orbit,0deg))); transform-box: fill-box; transform-origin: center; transition: transform .06s linear; }
-#about .signal-path { stroke-dasharray: 1; stroke-dashoffset: var(--signal-dash,.5); filter: drop-shadow(0 0 5px rgba(255,104,78,.3)); }
+#about .signal-path { stroke-dasharray: 1; stroke-dashoffset: var(--signal-dash,.5); filter: drop-shadow(0 0 5px rgba(60,145,255,.3)); }
 #about .signal-node { transform: scale(var(--signal-scale,1)); transform-box: fill-box; transform-origin: center; }
 #about .about-art-index, #about .about-art-note { transition: letter-spacing .2s ease; }
 #about .about-art-index { letter-spacing: var(--about-label-spacing,.12em); }
@@ -24,7 +24,7 @@ html { scroll-behavior: smooth; }
 #skills .skill-word { opacity: var(--word-opacity,1); clip-path: inset(var(--word-cut,0%) 0 0); transform: translate3d(0,var(--word-lift,0px),0) rotateX(var(--word-angle,0deg)); transform-origin: top center; animation: none!important; transition: color .2s ease, border-color .2s ease, padding .25s ease; }
 #skills .skill-word:focus-visible { outline-color: var(--accent); }
 #skills .skill-group-label { position: relative; padding-bottom: 11px; }
-#skills .skill-group-label::after { content: ""; position: absolute; bottom: 0; left: 0; width: var(--scene-width,50%); height: 1px; background: linear-gradient(90deg,var(--accent),rgba(255,104,78,0)); }
+#skills .skill-group-label::after { content: ""; position: absolute; bottom: 0; left: 0; width: var(--scene-width,50%); height: 1px; background: linear-gradient(90deg,var(--accent),rgba(60,145,255,0)); }
 
 /* Work: real screenshots use a shutter reveal and subtle opposing perspective. */
 #work .project-preview { opacity: var(--work-opacity,1); clip-path: inset(0 var(--work-cut,0%) 0 0 round 4px); transform: perspective(1300px) rotateY(var(--work-tilt,0deg)) translate3d(0,var(--work-lift,0px),0); transform-origin: center; animation: none!important; will-change: transform, clip-path, opacity; }
@@ -36,7 +36,7 @@ html { scroll-behavior: smooth; }
 
 /* Process: four independent steps follow the scroll, with a line drawing under each. */
 #process .process-list li { position: relative; opacity: var(--step-opacity,1); clip-path: inset(0); transform: perspective(900px) rotateY(var(--step-turn,0deg)); translate: var(--step-shift,0px) 0; transform-origin: center; animation: none!important; }
-#process .process-list li::after { content: ""; position: absolute; top: -1px; left: 0; width: var(--step-line,0%); height: 1px; background: linear-gradient(90deg,var(--accent),rgba(255,104,78,.06)); transform-origin: left; }
+#process .process-list li::after { content: ""; position: absolute; top: -1px; left: 0; width: var(--step-line,0%); height: 1px; background: linear-gradient(90deg,var(--accent),rgba(60,145,255,.08)); transform-origin: left; }
 #process .process-list li > span { transition: filter .2s ease; filter: drop-shadow(0 8px 16px rgba(205,214,223,var(--step-glow,.06))); }
 
 /* Contact: the contact methods read as a kinetic list, not pop-up cards. */
@@ -45,7 +45,7 @@ html { scroll-behavior: smooth; }
 #contact .contact-option { position: relative; opacity: var(--contact-opacity,1); clip-path: inset(0 var(--contact-cut,0%) 0 0); translate: var(--contact-shift,0px) 0; border-inline: 0; border-radius: 0; background: transparent; box-shadow: none; animation: none!important; }
 #contact .contact-option + .contact-option { border-top: 0; }
 #contact .contact-option:hover, #contact .contact-option:focus-within { translate: 0 -2px; background: rgba(255,255,255,.025); }
-#contact .contact-option::after { content: ""; position: absolute; inset: auto 0 0; height: 1px; background: linear-gradient(90deg,transparent,rgba(255,104,78,.45),transparent); transform: scaleX(0); transition: transform .4s ease; }
+#contact .contact-option::after { content: ""; position: absolute; inset: auto 0 0; height: 1px; background: linear-gradient(90deg,transparent,rgba(60,145,255,.5),transparent); transform: scaleX(0); transition: transform .4s ease; }
 #contact .contact-option:hover::after, #contact .contact-option:focus-within::after { transform: scaleX(1); }
 
 @keyframes cinema-title { from { opacity: .45; clip-path: inset(0 0 65% 0); transform: translateY(24px); filter: blur(5px); } to { opacity: 1; clip-path: inset(0); transform: translateY(0); filter: blur(0); } }

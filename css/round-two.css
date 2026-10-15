@@ -1,0 +1,245 @@
+/* Round two: unify the blue-steel art direction and give every scene its own motion. */
+:root {
+  --accent: #3c91ff;
+  --accent-bright: #81ddff;
+  --steel: #edf5ff;
+  --steel-dim: #899bb2;
+}
+
+/* Hero: larger metal lettering, layered technical panels, restrained light. */
+.hero {
+  min-height: min(940px, calc(100svh - 76px));
+  background:
+    radial-gradient(ellipse at 72% 43%, rgba(24, 108, 244, .2), transparent 34%),
+    radial-gradient(ellipse at 18% 78%, rgba(8, 42, 91, .2), transparent 42%),
+    #030813;
+}
+.hero-name {
+  font-size: clamp(78px, 12.1vw, 170px);
+  line-height: .79;
+  letter-spacing: -.112em;
+  filter: drop-shadow(0 18px 30px rgba(0, 0, 0, .35));
+}
+.is-entered .hero-name .name-line:first-child .name-char {
+  background-image: linear-gradient(180deg, #fff 2%, #c7d7e8 15%, #52647b 31%, #f5faff 43%, #8b9caf 55%, #edf5ff 67%, #62738a 79%, #eaf3fc 92%);
+  background-size: 100% 180%;
+  animation: none;
+}
+.is-entered .hero-name .name-second .name-char {
+  background-image: linear-gradient(180deg, #c4f6ff 0%, #48bbff 20%, #075bdc 42%, #80dfff 54%, #1766e5 70%, #d8f7ff 100%);
+  background-size: 100% 180%;
+  animation: none;
+}
+.hero-name .name-period { color: #80e5ff; -webkit-text-fill-color: #80e5ff; }
+.hero-tagline { color: #84dcff; }
+.hero-visual { filter: drop-shadow(0 34px 46px rgba(0, 4, 14, .65)); }
+.hero-visual::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 11%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(31, 119, 255, .25), rgba(50, 172, 255, .07) 43%, transparent 74%);
+  filter: blur(10px);
+}
+.hero-relic {
+  color: transparent;
+  background-image: linear-gradient(165deg, #f9fcff 2%, #52647c 15%, #edf5ff 28%, #788ba2 40%, #f7fbff 50%, #354b68 62%, #d7e5f4 75%, #596d87 88%, #f8fcff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 1px 1px #93a6be, 2px 2px #50647c, 4px 5px #26364b, 8px 14px 25px rgba(0, 0, 0, .75), 0 0 42px rgba(90, 166, 255, .2);
+  animation: relic-turn 16s ease-in-out infinite alternate;
+}
+.orbit-visual { filter: drop-shadow(0 0 30px rgba(42, 130, 255, .2)); }
+.ring-c { stroke: rgba(71, 153, 255, .56); }
+.orb-core, .orb-point { fill: #82e6ff; }
+.code-window {
+  border-color: rgba(75, 151, 255, .56);
+  background: linear-gradient(145deg, rgba(7, 22, 45, .97), rgba(3, 8, 19, .96));
+  box-shadow: 0 30px 78px rgba(0, 0, 0, .65), 0 0 42px rgba(22, 104, 236, .2), inset 0 1px rgba(191, 225, 255, .12);
+}
+.code-window::after {
+  content: "";
+  position: absolute;
+  inset: 34px 0 0;
+  pointer-events: none;
+  background: linear-gradient(112deg, transparent 25%, rgba(119, 191, 255, .045) 49%, transparent 68%);
+}
+.hero-index { color: #91a9c8; }
+.scroll-cue { color: #b5c9e4; }
+
+body.hero-motion-ready .hero-name .name-char,
+body.hero-motion-ready .hero-name > .name-line,
+body.hero-motion-ready .hero-content > .eyebrow,
+body.hero-motion-ready .hero-tagline,
+body.hero-motion-ready .hero-copy,
+body.hero-motion-ready .hero-actions,
+body.hero-motion-ready .hero-relic,
+body.hero-motion-ready .tech-float { animation: none !important; }
+body.hero-motion-ready .hero-grid,
+body.hero-motion-ready .hero-content,
+body.hero-motion-ready .hero-visual,
+body.hero-motion-ready .code-window,
+body.hero-motion-ready .hero-tech-floats { transition: none !important; }
+.hero-name .name-char { transform-style: preserve-3d; backface-visibility: hidden; }
+.hero-tagline .motion-char, .hero-tagline .motion-word { display: inline-block; white-space: pre; transform-origin: 50% 90%; }
+
+@media (min-width: 1100px) {
+  .hero-name { font-size: clamp(146px, 12.2vw, 180px); }
+  .hero-content { max-width: 800px; }
+  .hero-visual { width: min(49vw, 600px); }
+}
+@media (max-width: 900px) and (min-width: 761px) {
+  .hero-name { font-size: clamp(82px, 11vw, 112px); }
+  .code-window { right: 5%; width: 280px; }
+}
+@media (max-width: 760px) {
+  .hero { min-height: auto; }
+  .hero-name { font-size: clamp(70px, 13.8vw, 102px); }
+  .hero-visual { filter: none; }
+  .hero-relic { animation: none; }
+  .code-window::after { display: none; }
+}
+@media (max-width: 600px) {
+  /* Keep the real reveal observer, but remove continuous per-item scrubbing on touch layouts. */
+  #about .about-art, #about .about-signal, #about .signal-ring-three,
+  #skills .skill-group, #skills .skill-word,
+  #work .project-preview, #work .project-screenshot, #work .project-meta,
+  #process .process-list li, #contact .contact-option {
+    transform: none !important;
+    translate: none !important;
+    clip-path: none !important;
+    opacity: 1 !important;
+    will-change: auto !important;
+  }
+  .ring-a, .ring-b, .ring-c, .ring-d, .orb-point, .tech-float { animation: none; }
+  .hero-index { left: 0; right: auto; bottom: 17px; }
+  .hero-index span:last-child { display: none; }
+  .scroll-cue { left: auto; right: 0; bottom: 15px; transform: none; flex-direction: row; gap: 8px; }
+  .rtl-mode .hero-index { left: auto; right: 0; }
+  .rtl-mode .scroll-cue { left: 0; right: auto; }
+}
+@media (max-width: 480px) {
+  .hero-name { font-size: clamp(61px, 15.6vw, 76px); }
+}
+@media (max-width: 340px) {
+  .hero-name { font-size: 57px; }
+}
+
+/* Skills: preserve the three real categories and all seven expandable details. */
+.skill-map { gap: 20px; align-items: stretch; }
+.skill-group {
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(77, 145, 231, .32);
+  background: linear-gradient(155deg, rgba(10, 28, 54, .9), rgba(4, 12, 27, .82));
+  box-shadow: inset 0 1px rgba(164, 205, 255, .06), 0 20px 50px rgba(0, 0, 0, .2);
+  transition: border-color .3s ease, transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease;
+}
+.skill-group::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 16px;
+  right: 16px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(104, 189, 255, .58), transparent);
+  pointer-events: none;
+}
+.skill-group-featured { border-color: rgba(70, 148, 255, .44); }
+.skill-group:hover, .skill-group:focus-within {
+  border-color: rgba(91, 174, 255, .64);
+  box-shadow: inset 0 1px rgba(164, 205, 255, .08), 0 24px 56px rgba(0, 30, 78, .22);
+}
+.skill-group-label { color: #b9d1ef; letter-spacing: .12em; }
+.skill-group-label span:first-child { color: #66b9ff; }
+.skill-word {
+  min-height: 64px;
+  border-color: rgba(105, 162, 229, .2);
+  background: linear-gradient(105deg, rgba(7, 20, 40, .78), rgba(5, 14, 30, .54));
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.skill-word::before { transition: transform .3s ease, box-shadow .3s ease; }
+.skill-word:hover::before, .skill-word:focus-visible::before, .skill-word[aria-expanded="true"]::before { transform: scale(1.06); }
+.skill-word[aria-expanded="true"] { box-shadow: inset 0 0 24px rgba(31, 115, 219, .12); }
+.skill-detail { max-width: 36ch; color: #bdd0e6; line-height: 1.7; }
+.skill-detail:not([hidden]) { animation: skill-detail-in .28s ease-out both; }
+@keyframes skill-detail-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 600px) {
+  .skill-group { padding: 14px; }
+  .skill-word { min-height: 60px; }
+  .skill-detail { margin-inline-start: 58px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skill-group, .skill-detail:not([hidden]) { animation: none; transition: none; }
+  .skill-word::before { transition: none; }
+}
+
+/* Projects: keep the supplied screenshots and live destinations as the focal points. */
+.work-section {
+  background:
+    radial-gradient(ellipse at 18% 42%, rgba(17, 86, 186, .11), transparent 40%),
+    radial-gradient(ellipse at 88% 80%, rgba(27, 113, 224, .09), transparent 42%);
+}
+.project-list { column-gap: clamp(18px, 2.8vw, 38px); row-gap: clamp(24px, 4vw, 52px); }
+.project, .project:nth-child(even) {
+  border-color: rgba(67, 135, 222, .34);
+  border-radius: 12px;
+  background: linear-gradient(150deg, rgba(8, 21, 42, .97), rgba(4, 10, 22, .97));
+  box-shadow: 0 22px 58px rgba(0, 0, 0, .36), inset 0 1px rgba(170, 207, 255, .06);
+  transition: border-color .35s ease, box-shadow .4s ease, transform .4s cubic-bezier(.2,.7,.2,1);
+}
+.project:nth-child(even) { background: linear-gradient(150deg, rgba(8, 25, 49, .97), rgba(4, 10, 22, .97)); }
+.project:hover, .project:focus-within {
+  border-color: rgba(91, 174, 255, .72);
+  box-shadow: 0 28px 68px rgba(4, 39, 96, .3), 0 0 26px rgba(35, 123, 255, .12), inset 0 1px rgba(170, 207, 255, .08);
+  transform: translateY(-4px);
+}
+.project-preview, .project:nth-child(even) .project-preview {
+  position: relative;
+  overflow: hidden;
+  background: #08162b;
+  isolation: isolate;
+}
+.project-preview::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(130deg, rgba(113, 188, 255, .14), transparent 34% 72%, rgba(8, 20, 42, .18));
+  opacity: .7;
+  transition: opacity .4s ease;
+}
+.project-preview:hover::before, .project-preview:focus-visible::before { opacity: .25; }
+.project-screenshot { display: block; }
+.project-meta { position: relative; z-index: 1; }
+.project-title-row .arrow-link {
+  min-height: 42px;
+  padding: 0 13px;
+  border: 1px solid rgba(91, 157, 231, .35);
+  border-radius: 999px;
+  background: rgba(24, 74, 140, .18);
+  transition: background .25s ease, border-color .25s ease, color .25s ease;
+}
+.project-title-row .arrow-link:hover, .project-title-row .arrow-link:focus-visible {
+  border-color: #55a8ff;
+  background: #176bd0;
+  color: #fff;
+}
+.project-title-row .arrow-link span:last-child { color: #91deff; }
+@media (max-width: 760px) {
+  .project-preview, .project:nth-child(even) .project-preview { aspect-ratio: 1.58; }
+  .project-title-row { align-items: center; }
+  .project-title-row .arrow-link { min-height: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project, .project-preview::before, .project-title-row .arrow-link { transition: none; }
+  .project:hover, .project:focus-within { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-name .name-line .name-char { animation: none !important; background-position: 0 0; }
+  .hero-relic { animation: none; }
+}
