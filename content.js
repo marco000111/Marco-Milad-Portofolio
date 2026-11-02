@@ -1,6 +1,6 @@
 export const content = {
   en: {
-    title: 'Marco Milad — Front-end Developer for Growing Businesses', description: 'Fast, useful websites for small and growing businesses. Front-end development in Egypt, from design to launch.', skip:'Skip to content',navLabel:'Main navigation',photoLabel:'Marco’s portrait placeholder',photoPending:'PHOTO TO ADD',previewCaption:'CONCEPT / LIVE PREVIEW',servicesKicker:'01 / SERVICES',workKicker:'02 / SELECTED WORK',appsKicker:'PERSONAL PROJECTS',aboutKicker:'03 / ABOUT',skillsKicker:'04 / CAPABILITIES',contactKicker:'05 / CONTACT',downloadCv:'Download CV',cvAvailable:false,
+    title: 'Marco Milad — Front-end Developer for Growing Businesses', description: 'Fast, useful websites for small and growing businesses. Front-end development in Egypt, from design to launch.', skip:'Skip to content',navLabel:'Main navigation',photoLabel:'Marco’s portrait placeholder',downloadCv:'Download CV',cvAvailable:false,
     nav: ['Services','Work','About','Skills','Contact'], available: 'Available for new projects', hero: 'I build fast websites that turn visitors into customers.',
     intro: 'Front-end developer for small and growing businesses: landing pages, company sites and online stores, from design to launch.', whatsapp: 'Chat on WhatsApp', seeWork: 'See my work', trust: ['Mobile-first','Arabic + English (RTL)','Clear, accessible interfaces'],
     servicesTitle: 'What I can build for you', servicesIntro: 'Practical websites designed around your customers and business goals.',
@@ -25,7 +25,7 @@ export const content = {
     formRequired:'Please complete your name, project type and message.', themeLight:'Switch to light theme', themeDark:'Switch to dark theme', language:'Switch to Arabic',
   },
   ar: {
-    title:'ماركو ميلاد — مطور واجهات أمامية للأعمال', description:'مواقع سريعة ومفيدة للمشروعات الصغيرة والنامية. تطوير واجهات أمامية في مصر من التصميم حتى الإطلاق.',skip:'تخطّي إلى المحتوى',navLabel:'التنقل الرئيسي',photoLabel:'صورة ماركو الشخصية غير مضافة بعد',photoPending:'الصورة غير مضافة',previewCaption:'نموذج حي لمشروعات تجريبية',servicesKicker:'01 / الخدمات',workKicker:'02 / أعمال مختارة',appsKicker:'مشروعات شخصية',aboutKicker:'03 / نبذة عني',skillsKicker:'04 / المهارات',contactKicker:'05 / تواصل',downloadCv:'تحميل السيرة الذاتية',
+    title:'ماركو ميلاد — مطور واجهات أمامية للأعمال', description:'مواقع سريعة ومفيدة للمشروعات الصغيرة والنامية. تطوير واجهات أمامية في مصر من التصميم حتى الإطلاق.',skip:'تخطّي إلى المحتوى',navLabel:'التنقل الرئيسي',photoLabel:'صورة ماركو الشخصية غير مضافة بعد',downloadCv:'تحميل السيرة الذاتية',
     nav:['الخدمات','الأعمال','عني','المهارات','تواصل'], available:'متاح لمشروعات جديدة', hero:'أبني مواقع سريعة تحوّل الزوار إلى عملاء.',
     intro:'مطور واجهات أمامية للشركات الصغيرة والنامية: صفحات هبوط ومواقع شركات ومتاجر إلكترونية، من التصميم حتى الإطلاق.', whatsapp:'كلّمني على واتساب', seeWork:'شاهد أعمالي', trust:['تصميم يبدأ بالموبايل','العربية والإنجليزية (RTL)','واجهات واضحة وسهلة الاستخدام'],
     servicesTitle:'كيف أقدر أساعد مشروعك؟', servicesIntro:'مواقع عملية تراعي عملاءك وأهداف مشروعك.',
