@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://marcomiladportofolio.vercel.app/sitemap.xml
