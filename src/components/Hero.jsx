@@ -1,7 +1,11 @@
 import { useMemo } from 'react';
-import { motion, useMotionValue, useReducedMotion, useSpring } from 'framer-motion';
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+} from 'framer-motion';
 import { ArrowDown, ArrowRight, ArrowUpRight, MoveUpRight } from 'lucide-react';
-import AvatarCard from './AvatarCard.jsx';
 
 function MagneticLink({ href, children, className }) {
   const reduceMotion = useReducedMotion();
@@ -37,26 +41,34 @@ function MagneticLink({ href, children, className }) {
 
 export default function Hero({ content, ui, language }) {
   const words = useMemo(() => ui.headline.split(/\s+/), [ui.headline]);
+  const reduceMotion = useReducedMotion();
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const portraitX = useSpring(pointerX, { stiffness: 90, damping: 24 });
+  const portraitY = useSpring(pointerY, { stiffness: 90, damping: 24 });
+
+  const movePortrait = (event) => {
+    if (reduceMotion || event.pointerType !== 'mouse') return;
+    const bounds = event.currentTarget.getBoundingClientRect();
+    pointerX.set(((event.clientX - bounds.left) / bounds.width - 0.5) * 9);
+    pointerY.set(((event.clientY - bounds.top) / bounds.height - 0.5) * 7);
+  };
+  const resetPortrait = () => {
+    pointerX.set(0);
+    pointerY.set(0);
+  };
 
   return (
     <motion.section id="home" layout="position" className="hero-section page-shell" aria-labelledby="hero-heading">
-      <div className="hero-background" aria-hidden="true">
-        <div className="hero-grid" />
-        <div className="hero-glow hero-glow-a" />
-        <div className="hero-glow hero-glow-b" />
-        <div className="hero-coordinate" dir="ltr">MM / 01—2026</div>
-      </div>
       <div className="hero-copy">
         <motion.p
           className="hero-identity"
-          dir="ltr"
+          dir={language === 'ar' ? 'rtl' : 'ltr'}
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.16, duration: 0.7 }}
         >
-          <span>MARCO <b>MILAD</b></span>
-          <i>·</i>
-          <small dir={language === 'ar' ? 'rtl' : 'ltr'}>{ui.heroRole}</small>
+          <small>{ui.heroRole}</small>
         </motion.p>
         <motion.div
           className="availability"
@@ -67,7 +79,17 @@ export default function Hero({ content, ui, language }) {
           <span className="availability-pulse" aria-hidden="true" />
           {ui.status}
         </motion.div>
-        <h1 id="hero-heading" className="hero-heading" aria-label={ui.headline}>
+        <motion.h1
+          id="hero-heading"
+          className="hero-name"
+          dir="ltr"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.34, duration: 0.8, ease: [0.2, 0.8, 0.2, 1] }}
+        >
+          <span>MARCO</span> <b>MILAD</b>
+        </motion.h1>
+        <h2 className="hero-heading" aria-label={ui.headline}>
           {words.map((word, index) => (
             <motion.span
               className="hero-word-mask"
@@ -92,7 +114,7 @@ export default function Hero({ content, ui, language }) {
               </span>
             </motion.span>
           ))}
-        </h1>
+        </h2>
         <motion.p
           className="hero-subheadline"
           initial={{ opacity: 0, y: 16 }}
@@ -134,11 +156,28 @@ export default function Hero({ content, ui, language }) {
       </div>
       <motion.div
         className="hero-visual"
-        initial={{ opacity: 0, x: language === 'ar' ? -26 : 26, scale: 0.97 }}
-        animate={{ opacity: 1, x: 0, scale: 1 }}
-        transition={{ delay: 0.52, duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
+        initial={{ opacity: 0, clipPath: 'inset(5% 0 0 0)' }}
+        animate={{ opacity: 1, clipPath: 'inset(0% 0 0 0)' }}
+        transition={{ delay: 0.18, duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+        onPointerMove={movePortrait}
+        onPointerLeave={resetPortrait}
       >
-        <AvatarCard language={language} status={ui.status} />
+        <div className="hero-portrait-stage">
+          <motion.img
+            className="hero-portrait"
+            src="/assets/images/marco-milad-portrait.png"
+            alt={
+              language === 'ar'
+                ? 'صورة سينمائية واقعية لماركو ميلاد بشعره المجعد ونظارته السوداء'
+                : 'Photorealistic studio portrait of Marco Milad with curly hair and distinctive black sunglasses'
+            }
+            width="1141"
+            height="1378"
+            fetchPriority="high"
+            decoding="async"
+            style={{ x: portraitX, y: portraitY }}
+          />
+        </div>
       </motion.div>
       <a href="#about" className="hero-scroll" aria-label={ui.scroll}>
         <span>{ui.scroll}</span>
