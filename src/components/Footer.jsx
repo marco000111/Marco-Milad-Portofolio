@@ -13,7 +13,7 @@ export default function Footer({ copy, ui, language }) {
       </p>
       <div className="footer-bottom">
         <span>© {new Date().getFullYear()} Marco Milad</span>
-        <a href="#projects">{copy.nav[3]} <ArrowUpRight size={13} /></a>
+        <a href="#projects">{ui.nav[4]} <ArrowUpRight size={13} /></a>
         <a className="back-top" href="#home" aria-label={ui.backToTop}>
           <ArrowUp size={16} />
         </a>

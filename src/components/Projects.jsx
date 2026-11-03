@@ -1,6 +1,6 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, ExternalLink, Github, Layers3 } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight, ExternalLink, Github, Layers3 } from 'lucide-react';
 import ProjectModal from './ProjectModal.jsx';
 
 const filters = ['All', 'Website', 'Web app'];
@@ -8,6 +8,7 @@ const filters = ['All', 'Website', 'Web app'];
 export default function Projects({ projects, ui, language }) {
   const [filter, setFilter] = useState(filters[0]);
   const [selectedProject, setSelectedProject] = useState(null);
+  const railRef = useRef(null);
   const closeModal = useCallback(() => setSelectedProject(null), []);
   const visibleProjects = useMemo(
     () => filter === 'All' ? projects : projects.filter((project) => project.category === filter),
@@ -15,6 +16,10 @@ export default function Projects({ projects, ui, language }) {
   );
 
   const chooseFilter = (index) => setFilter(filters[index] || 'All');
+  const moveRail = (direction) => railRef.current?.scrollBy({
+    left: direction * railRef.current.clientWidth * (language === 'ar' ? -0.78 : 0.78),
+    behavior: 'smooth',
+  });
 
   return (
     <motion.section id="projects" layout="position" className="projects-section page-shell section-block gsap-reveal">
@@ -40,8 +45,12 @@ export default function Projects({ projects, ui, language }) {
           ))}
         </div>
       </div>
+      <div className="project-rail-controls" dir="ltr">
+        <button type="button" onClick={() => moveRail(-1)} aria-label={language === 'ar' ? 'المشاريع السابقة' : 'Previous projects'}><ArrowLeft size={17} /></button>
+        <button type="button" onClick={() => moveRail(1)} aria-label={language === 'ar' ? 'المشاريع التالية' : 'Next projects'}><ArrowRight size={17} /></button>
+      </div>
       {visibleProjects.length > 0 ? (
-        <motion.div className="projects-grid" layout>
+        <motion.div ref={railRef} className="projects-grid" layout tabIndex={0} aria-label={ui.projectsKicker}>
           {visibleProjects.map((project, index) => (
             <motion.article
               className={`project-card glass-panel project-card-${index % 3}`}

@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Code2, FileText, House, Menu, PanelsTopLeft, Send, UserRound, X } from 'lucide-react';
 
 const sectionIds = ['home', 'about', 'resume', 'skills', 'projects', 'contact'];
+const sectionIcons = [House, UserRound, FileText, Code2, PanelsTopLeft, Send];
+const visualOrder = [0, 1, 4, 3, 2, 5];
 
 export default function Navbar({ copy, language, onLanguageChange }) {
   const [active, setActive] = useState('home');
@@ -57,16 +59,21 @@ export default function Navbar({ copy, language, onLanguageChange }) {
           </span>
         </a>
         <nav className="desktop-nav" aria-label={language === 'ar' ? 'التنقل الرئيسي' : 'Main navigation'}>
-          {copy.nav.map((label, index) => {
-            const id = sectionIds[index];
+          {visualOrder.map((sourceIndex, index) => {
+            const label = copy.nav[sourceIndex];
+            const id = sectionIds[sourceIndex];
+            const Icon = sectionIcons[sourceIndex];
             return (
               <a
                 href={`#${id}`}
                 key={id}
                 className={active === id ? 'nav-link is-active' : 'nav-link'}
                 aria-current={active === id ? 'location' : undefined}
+                aria-label={label}
+                title={label}
               >
-                {label}
+                <Icon size={18} strokeWidth={1.8} aria-hidden="true" />
+                <span className="nav-tooltip" aria-hidden="true">{label}</span>
                 {active === id && (
                   <motion.span
                     className="nav-indicator"
@@ -113,19 +120,24 @@ export default function Navbar({ copy, language, onLanguageChange }) {
             transition={{ duration: 0.48, ease: [0.76, 0, 0.24, 1] }}
           >
             <div className="mobile-nav-links">
-              {copy.nav.map((label, index) => (
-                <motion.a
-                  href={`#${sectionIds[index]}`}
-                  key={sectionIds[index]}
-                  onClick={closeMenu}
-                  initial={{ opacity: 0, y: 22 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 + index * 0.055 }}
-                >
-                  <span className="mobile-nav-number">0{index + 1}</span>
-                  {label}
-                </motion.a>
-              ))}
+              {visualOrder.map((sourceIndex, index) => {
+                const label = copy.nav[sourceIndex];
+                const Icon = sectionIcons[sourceIndex];
+                return (
+                  <motion.a
+                    href={`#${sectionIds[sourceIndex]}`}
+                    key={sectionIds[sourceIndex]}
+                    onClick={closeMenu}
+                    initial={{ opacity: 0, y: 22 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 + index * 0.055 }}
+                  >
+                    <Icon size={20} aria-hidden="true" />
+                    <span className="mobile-nav-number">0{index + 1}</span>
+                    {label}
+                  </motion.a>
+                );
+              })}
             </div>
             <span className="mobile-nav-caption" dir="ltr">
               MARCO MILAD · FRONT-END DEVELOPER & GRAPHIC DESIGNER

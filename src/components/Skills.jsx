@@ -48,6 +48,8 @@ export default function Skills({ skills, categories, ui, language }) {
           <motion.article
             className="skill-card glass-panel"
             key={skill.name}
+            aria-label={skill.name}
+            title={skill.name}
             layout
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}

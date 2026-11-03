@@ -45,7 +45,13 @@ export default function About({ content, ui, language }) {
     <motion.section id="about" layout="position" className="about-section page-shell section-block gsap-reveal">
       <div className="section-heading">
         <p className="section-kicker"><span>01</span> / {ui.aboutKicker}</p>
-        <h2>{content.aboutTitle}</h2>
+          <h2>
+            {language === 'ar' ? (
+              <>أحوّل الأفكار إلى <em>تجارب رقمية تفاعلية</em></>
+            ) : (
+              <>I turn ideas into <em>digital experiences</em> that feel alive.</>
+            )}
+          </h2>
         <p>{content.about}</p>
         <div className="about-extra">
           <span className="about-mark"><Sparkles size={16} /></span>

@@ -24,6 +24,6 @@ The build outputs the React application and copies the standalone demo sites, lo
 
 - Update bilingual site content in `content.js` and app labels/project mappings in `src/data/portfolio.js`.
 - The contact links and phone number are defined in `src/components/Contact.jsx`.
-- The hero ID badge uses the local cyberpunk portrait at `assets/images/marco-cyberpunk-avatar.jpeg`.
+- The hero uses the supplied portrait at `assets/images/marco-milad-portrait.png` (1141 × 1378).
 - The interactive bilingual project timeline is in `src/components/Resume.jsx`; its matching dark, one-page PDF is generated in `src/lib/createResume.js`.
 - Project screenshots and demo photography are stored locally under `assets/images/`.

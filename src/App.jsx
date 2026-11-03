@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { LayoutGroup, MotionConfig, motion, useReducedMotion } from 'framer-motion';
+import { LayoutGroup, MotionConfig, motion } from 'framer-motion';
 import About from './components/About.jsx';
 import Contact from './components/Contact.jsx';
 import DeferredAnalytics from './components/DeferredAnalytics.jsx';
 import Footer from './components/Footer.jsx';
 import Hero from './components/Hero.jsx';
+import ManifestoScene from './components/ManifestoScene.jsx';
 import Navbar from './components/Navbar.jsx';
-import Preloader from './components/Preloader.jsx';
 import Projects from './components/Projects.jsx';
 import Resume from './components/Resume.jsx';
 import ScrollDirector from './components/ScrollDirector.jsx';
@@ -26,12 +26,8 @@ function getInitialLanguage() {
 
 export default function App() {
   const [language, setLanguage] = useState(getInitialLanguage);
-  const [welcomeComplete, setWelcomeComplete] = useState(false);
-  const reducedMotion = useReducedMotion();
   const portfolio = useMemo(() => getPortfolio(language), [language]);
   const { content, ui, projects, skills, skillCategories } = portfolio;
-
-  const finishWelcome = useCallback(() => setWelcomeComplete(true), []);
 
   useSmoothScroll();
 
@@ -63,24 +59,19 @@ export default function App() {
       <motion.main
         id="main"
         layout="position"
-        initial={reducedMotion ? false : { opacity: 0, y: 20 }}
-        animate={welcomeComplete || reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0.88, y: 20 }}
-        transition={{ duration: 0.45, delay: welcomeComplete && !reducedMotion ? 0.05 : 0 }}
+        initial={false}
+        animate={{ opacity: 1, y: 0 }}
       >
         <Hero content={content} ui={ui} language={language} />
-        <About content={content} ui={ui} language={language} />
-        <Resume language={language} />
-        <Skills skills={skills} categories={skillCategories} ui={ui} language={language} />
         <Projects projects={projects} ui={ui} language={language} />
+        <About content={content} ui={ui} language={language} />
+        <ManifestoScene language={language} />
+        <Skills skills={skills} categories={skillCategories} ui={ui} language={language} />
+        <Resume language={language} />
         <Contact ui={ui} language={language} />
       </motion.main>
       <Footer copy={content} ui={ui} language={language} />
       <ScrollDirector />
-      <Preloader
-        onComplete={finishWelcome}
-        language={language}
-        copy={ui}
-      />
       <DeferredAnalytics />
     </div>
     </LayoutGroup>
