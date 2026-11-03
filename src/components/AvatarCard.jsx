@@ -2,59 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useInView, useMotionValue, useReducedMotion, useSpring, useTransform } from 'framer-motion';
 import { ArrowUpRight, BadgeCheck } from 'lucide-react';
 
-function PortraitIllustration() {
-  return (
-    <svg
-      className="avatar-illustration"
-      viewBox="0 0 360 410"
-      role="img"
-      aria-labelledby="avatar-title"
-    >
-      <title id="avatar-title">Stylized illustrated developer portrait</title>
-      <defs>
-        <linearGradient id="portrait-bg" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#0d1733" />
-          <stop offset="1" stopColor="#071016" />
-        </linearGradient>
-        <linearGradient id="portrait-jacket" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#25395d" />
-          <stop offset="1" stopColor="#111828" />
-        </linearGradient>
-        <linearGradient id="portrait-skin" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#f4cba3" />
-          <stop offset="1" stopColor="#d99d78" />
-        </linearGradient>
-        <radialGradient id="portrait-light" cx="50%" cy="28%" r="70%">
-          <stop offset="0" stopColor="#00f2fe" stopOpacity=".24" />
-          <stop offset="1" stopColor="#00f2fe" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-      <rect width="360" height="410" rx="22" fill="url(#portrait-bg)" />
-      <rect width="360" height="410" rx="22" fill="url(#portrait-light)" />
-      <path d="M37 337a144 144 0 0 1 286 0v73H37z" fill="#101c31" stroke="#1b3658" />
-      <path d="M73 366c12-70 54-102 107-102s95 32 107 102v44H73z" fill="url(#portrait-jacket)" />
-      <path d="m151 267 29 38 29-38 20 17-28 72h-42l-28-72z" fill="#e2ecf6" />
-      <path d="m180 305 16 22-16 60-16-60z" fill="#19bfd9" />
-      <path d="M144 213v55c0 20 16 36 36 36s36-16 36-36v-55z" fill="url(#portrait-skin)" />
-      <path d="M129 147c0-46 23-76 51-76s51 30 51 76v40c0 42-22 70-51 70s-51-28-51-70z" fill="url(#portrait-skin)" />
-      <path d="M126 162c-9-53 2-103 52-103 45 0 61 34 56 94-13-3-26-16-34-37-22 17-44 24-74 24z" fill="#172135" />
-      <path d="M134 165c-9 10-13 25-8 43-12-5-21-19-19-34 2-13 11-22 23-23z" fill="#dcaa8c" />
-      <path d="M226 165c9 10 13 25 8 43 12-5 21-19 19-34-2-13-11-22-23-23z" fill="#d89f7f" />
-      <path d="M151 166c6-5 15-6 22-2" fill="none" stroke="#5b3e39" strokeWidth="4" strokeLinecap="round" />
-      <path d="M188 164c7-4 16-3 21 2" fill="none" stroke="#5b3e39" strokeWidth="4" strokeLinecap="round" />
-      <ellipse cx="164" cy="177" rx="4" ry="3" fill="#1c2430" />
-      <ellipse cx="197" cy="177" rx="4" ry="3" fill="#1c2430" />
-      <path d="M180 179c-1 11-6 20-10 24 6 4 14 4 20 0" fill="none" stroke="#bd8065" strokeWidth="3" strokeLinecap="round" />
-      <path d="M162 219c11 9 25 9 36 0" fill="none" stroke="#873f46" strokeWidth="4" strokeLinecap="round" />
-      <path d="M130 202c5 32 24 49 50 49s46-17 50-49c-2 40-19 75-50 75s-48-35-50-75z" fill="#292631" />
-      <circle cx="35" cy="59" r="2" fill="#00f2fe" />
-      <circle cx="323" cy="104" r="2" fill="#a855f7" />
-      <path d="M35 85h48M277 320h48" stroke="#6b8ebd" strokeOpacity=".35" />
-    </svg>
-  );
-}
-
-export default function AvatarCard({ language, status }) {
+export default function AvatarCard({ language }) {
   const reduceMotion = useReducedMotion();
   const [tiltEnabled, setTiltEnabled] = useState(false);
   const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 767px), (pointer: coarse)').matches);
@@ -96,6 +44,9 @@ export default function AvatarCard({ language, status }) {
   };
   const shouldFloat = !reduceMotion && isInView;
   const useMobileFloat = isMobile && shouldFloat;
+  const role = language === 'ar'
+    ? 'مطور واجهات أمامية ومصمم جرافيك'
+    : 'Front-End Developer & Graphic Designer';
 
   return (
     <div className="id-scene" aria-label={language === 'ar' ? 'بطاقة تعريف رقمية' : 'Digital developer ID card'}>
@@ -125,7 +76,16 @@ export default function AvatarCard({ language, status }) {
             <span className="id-card-signal" aria-hidden="true"><i /> ONLINE</span>
           </div>
           <div className="portrait-frame">
-            <PortraitIllustration />
+            <img
+              className="avatar-illustration"
+              src="/assets/images/marco-cyberpunk-avatar.jpeg"
+              alt={language === 'ar'
+                ? 'صورة ثلاثية الأبعاد بطابع سايبربانك بشعر مجعد ونظارة داكنة وإضاءة نيون'
+                : '3D cyberpunk portrait with curly hair, dark shield sunglasses, and neon-lit clothing'}
+              width="768"
+              height="1024"
+              fetchPriority="high"
+            />
             <motion.span
               className="portrait-shine"
               aria-hidden="true"
@@ -139,7 +99,7 @@ export default function AvatarCard({ language, status }) {
             <div>
               <span className="id-card-eyebrow">{language === 'ar' ? 'المصمم والمطور' : 'DESIGNER & DEVELOPER'}</span>
               <h2 dir="ltr">MARCO <b>MILAD</b></h2>
-              <p>{status}</p>
+              <p className="id-card-role">{role}</p>
             </div>
             <span className="id-verified" aria-label={language === 'ar' ? 'معلومات شخصية' : 'Personal portfolio'}>
               <BadgeCheck size={19} />

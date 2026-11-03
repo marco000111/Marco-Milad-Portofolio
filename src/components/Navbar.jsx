@@ -79,14 +79,25 @@ export default function Navbar({ copy, language, onLanguageChange }) {
           })}
         </nav>
         <div className="nav-actions">
-          <button
-            className="language-toggle"
-            type="button"
-            onClick={onLanguageChange}
-            aria-label={language === 'ar' ? 'Switch to English' : 'التبديل إلى العربية'}
-          >
-            {language === 'ar' ? 'EN' : 'ع'}
-          </button>
+          <div className="language-switcher" role="group" aria-label="Select language" dir="ltr">
+            <button
+              type="button"
+              aria-pressed={language === 'en'}
+              className={language === 'en' ? 'is-selected' : ''}
+              onClick={() => onLanguageChange('en')}
+            >
+              EN
+            </button>
+            <span aria-hidden="true">|</span>
+            <button
+              type="button"
+              aria-pressed={language === 'ar'}
+              className={language === 'ar' ? 'is-selected' : ''}
+              onClick={() => onLanguageChange('ar')}
+            >
+              عربي
+            </button>
+          </div>
           <button
             className="menu-toggle"
             type="button"

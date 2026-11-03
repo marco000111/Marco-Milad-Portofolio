@@ -54,9 +54,9 @@ export default function Hero({ content, ui, language }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.16, duration: 0.7 }}
         >
-          <span>MARCO <b>MILAD</b></span>
+          <span className="hero-identity-name">MARCO <b>MILAD</b></span>
           <i>·</i>
-          <small>FRONT-END DEVELOPER</small>
+          <small>FRONT-END DEVELOPER &amp; GRAPHIC DESIGNER</small>
         </motion.p>
         <motion.div
           className="availability"
@@ -138,7 +138,7 @@ export default function Hero({ content, ui, language }) {
         animate={{ opacity: 1, x: 0, scale: 1 }}
         transition={{ delay: 0.52, duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
       >
-        <AvatarCard language={language} status={ui.status} />
+        <AvatarCard language={language} />
       </motion.div>
       <a href="#about" className="hero-scroll" aria-label={ui.scroll}>
         <span>{ui.scroll}</span>

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { MotionConfig, motion, useReducedMotion } from 'framer-motion';
 import About from './components/About.jsx';
 import Contact from './components/Contact.jsx';
@@ -26,6 +26,8 @@ function getInitialLanguage() {
 export default function App() {
   const [language, setLanguage] = useState(getInitialLanguage);
   const [welcomeComplete, setWelcomeComplete] = useState(false);
+  const [languageSwitching, setLanguageSwitching] = useState(false);
+  const languageSwitchTimer = useRef(0);
   const reducedMotion = useReducedMotion();
   const portfolio = useMemo(() => getPortfolio(language), [language]);
   const { content, ui, projects, skills, skillCategories } = portfolio;
@@ -50,14 +52,20 @@ export default function App() {
     }
   }, [content.description, content.title, language]);
 
-  const toggleLanguage = useCallback(() => {
-    setLanguage((current) => current === 'en' ? 'ar' : 'en');
-  }, []);
+  useEffect(() => () => window.clearTimeout(languageSwitchTimer.current), []);
+
+  const switchLanguage = useCallback((nextLanguage) => {
+    if (nextLanguage === language) return;
+    window.clearTimeout(languageSwitchTimer.current);
+    setLanguageSwitching(true);
+    setLanguage(nextLanguage);
+    languageSwitchTimer.current = window.setTimeout(() => setLanguageSwitching(false), 420);
+  }, [language]);
 
   return (
     <MotionConfig reducedMotion="user">
-    <div className="app-shell min-h-screen bg-space text-ink">
-      <Navbar copy={ui} language={language} onLanguageChange={toggleLanguage} />
+    <div className={`app-shell min-h-screen bg-space text-ink${languageSwitching ? ' is-language-switching' : ''}`}>
+      <Navbar copy={ui} language={language} onLanguageChange={switchLanguage} />
       <motion.main
         id="main"
         initial={reducedMotion ? false : { opacity: 0, y: 20 }}
@@ -65,7 +73,7 @@ export default function App() {
         transition={{ duration: 0.8, delay: welcomeComplete && !reducedMotion ? 0.08 : 0 }}
       >
         <Hero content={content} ui={ui} language={language} />
-        <About content={content} ui={ui} language={language} />
+        <About content={content} ui={ui} language={language} projects={projects} />
         <Skills skills={skills} categories={skillCategories} ui={ui} language={language} />
         <Projects projects={projects} ui={ui} language={language} />
         <Contact ui={ui} language={language} />
