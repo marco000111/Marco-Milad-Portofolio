@@ -1,20 +1,29 @@
 # Marco Milad Portfolio
 
-A lightweight, static personal portfolio built with HTML, CSS, and vanilla JavaScript. No build step or dependencies are required.
+A bilingual React portfolio built with Vite, Tailwind CSS, Framer Motion, GSAP, Lenis, and Lucide icons. The main page is responsive and supports English and Arabic/RTL. The three standalone demo websites remain under `/demos/`.
 
-## Preview
-
-Run the included dependency-free local preview server from this folder:
+## Development
 
 ```sh
-node server.mjs
+npm install
+npm run dev
 ```
 
-Then visit <http://localhost:8000>. ES modules work best when served over HTTP rather than opened as a `file://` URL.
+Vite starts at <http://localhost:5173>.
 
-## Personalize
+## Production
 
-- Edit English and Arabic copy in `js/translations.js`.
-- Update the WhatsApp, email, or Instagram destinations in the contact section of `index.html` if they change.
-- Project preview screenshots are stored in `assets/images/` and shown in `index.html`.
-- The live project URLs are in the project links in `index.html`.
+```sh
+npm run build
+npm run preview
+```
+
+The build outputs the React application and copies the standalone demo sites, local image assets, icons, and crawler files into `dist/`.
+
+## Portfolio content and assets
+
+- Update bilingual site content in `content.js` and app labels/project mappings in `src/data/portfolio.js`.
+- The contact links and phone number are defined in `src/components/Contact.jsx`.
+- The illustrated profile badge is an inline SVG in `src/components/AvatarCard.jsx`; no `avatar.jpg` file was present in the supplied repository.
+- The CV download is generated as a PDF from verified profile and project details in `src/lib/createResume.js`.
+- Project screenshots and demo photography are stored locally under `assets/images/`.
