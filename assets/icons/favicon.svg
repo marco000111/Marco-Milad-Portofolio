@@ -1,5 +1,14 @@
-<<<<<<< ours
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#f7f4ee"/><path d="M9 47V17h7l16 19 16-19h7v30h-8V29L32 47 17 29v18z" fill="#20231e"/><circle cx="53" cy="49" r="5" fill="#c95135"/></svg>
-=======
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" fill="#070B16"/><path d="M13 48V16h7l12 17 12-17h7v32h-8V29L32 42 21 29v19z" fill="#F4F7FF"/><circle cx="52" cy="48" r="5" fill="#65E7FF"/></svg>
->>>>>>> theirs
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#09172b"/><stop offset="1" stop-color="#030710"/></linearGradient>
+    <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f5fbff"/><stop offset=".46" stop-color="#a9c8e8"/><stop offset="1" stop-color="#20d5ff"/></linearGradient>
+    <radialGradient id="glow" cx="50%" cy="90%" r="68%"><stop stop-color="#087bff" stop-opacity=".42"/><stop offset="1" stop-color="#061020" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect x="8" y="8" width="496" height="496" rx="118" fill="url(#tile)"/>
+  <rect x="8" y="8" width="496" height="496" rx="118" fill="url(#glow)"/>
+  <rect x="9" y="9" width="494" height="494" rx="117" fill="none" stroke="#2a5788" stroke-opacity=".8" stroke-width="3"/>
+  <path d="M91 376V136h67l98 128 98-128h67v240h-71V245l-94 116-94-116v131z" fill="#06172d" transform="translate(0 8)"/>
+  <path d="M91 368V128h67l98 128 98-128h67v240h-71V237l-94 116-94-116v131z" fill="url(#mark)"/>
+  <path d="M91 128h67l98 128 98-128h67" fill="none" stroke="#fff" stroke-opacity=".36" stroke-width="5" stroke-linejoin="round"/>
+  <circle cx="417" cy="407" r="13" fill="#31d7ff"/><circle cx="417" cy="407" r="25" fill="#148fff" opacity=".16"/>
+</svg>
