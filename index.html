@@ -14,7 +14,30 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="css/style.css">
-  <style>.motion-intro{position:fixed;z-index:50;inset:0;display:grid;place-items:center;pointer-events:none}.motion-intro-mark{width:54px;height:54px;border-radius:15px;font-size:16px}.motion-intro-skip{position:absolute;inset-block-start:14px;inset-inline-end:14px;min-height:42px;padding:7px 12px;pointer-events:auto;font-size:13px}@media(prefers-reduced-motion:reduce){.motion-intro{display:none!important}}</style>
+  <style>
+    .motion-intro{position:fixed;z-index:50;inset:0;display:grid;place-items:center;overflow:hidden;isolation:isolate;background:#070b16;pointer-events:none}
+    .motion-intro::before,.motion-intro::after{position:absolute;inset:0;z-index:-1;content:"";pointer-events:none}
+    .motion-intro::before{background:radial-gradient(ellipse at 50% 46%,rgba(38,107,208,.2),transparent 52%),radial-gradient(ellipse at 80% 8%,rgba(36,103,158,.12),transparent 38rem)}
+    .motion-intro::after{opacity:.15;background-image:linear-gradient(rgba(100,161,207,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(100,161,207,.08) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse,#000,transparent 76%)}
+    .motion-intro-content{position:relative;z-index:1;width:min(90vw,900px);text-align:center}
+    .motion-intro-kicker,.motion-intro-role{margin:0;color:#9eb8dc;font:700 11px/1.5 "Space Mono",monospace;letter-spacing:.2em}
+    .motion-intro-name{display:flex;justify-content:center;gap:.22em;margin:12px 0 8px;direction:ltr;unicode-bidi:isolate;color:#f4f7ff;font:800 clamp(48px,11vw,120px)/.98 "DM Sans",Arial,sans-serif;letter-spacing:-.075em}
+    .motion-intro-mask{display:inline-flex;overflow:clip}
+    .motion-intro-word-accent{color:#f4a261}
+    .motion-intro-sweep{position:absolute;z-index:0;top:50%;left:8%;width:84%;height:1px;transform:scaleX(0);transform-origin:center;background:linear-gradient(90deg,transparent,#3978ff 28%,#65e7ff 50%,#3978ff 72%,transparent);box-shadow:0 0 20px rgba(101,231,255,.5)}
+    .motion-intro-skip{position:absolute;inset-block-start:14px;inset-inline-end:14px;min-height:42px;padding:7px 12px;pointer-events:auto;font-size:13px}
+    .hero-identity{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 10px;margin:0 0 15px;direction:ltr;unicode-bidi:isolate;color:#f4f7ff;font-size:clamp(34px,4.2vw,52px);font-weight:800;line-height:1.04;letter-spacing:-.06em}
+    .hero-name-mask{display:inline-flex;overflow:clip}
+    .hero-name-accent{color:transparent;background:linear-gradient(110deg,#f4a261,#ffd18b);background-clip:text;-webkit-background-clip:text}
+    .hero-identity-role{flex-basis:100%;margin-top:7px;color:#98b9ed;font:700 11px/1.5 "Space Mono",monospace;letter-spacing:.15em}
+    .logo-name{font-size:15px;letter-spacing:.11em}
+    .logo-name b{color:#f4a261}
+    #nav a{position:relative}
+    #nav a::after{position:absolute;right:0;bottom:7px;left:0;height:1px;content:"";transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,#3978ff,#65e7ff);transition:transform .24s ease}
+    #nav a:hover::after,#nav a:focus-visible::after,#nav a.is-active::after{transform:scaleX(1)}
+    @media(max-width:560px){.hero-identity{font-size:clamp(34px,9vw,42px)}.motion-intro-name{font-size:clamp(45px,12vw,76px)}}
+    @media(prefers-reduced-motion:reduce){.motion-intro{display:none!important}#nav a::after{transition:none}}
+  </style>
   <script defer src="assets/vendor/gsap.min.js"></script>
   <script defer src="assets/vendor/ScrollTrigger.min.js"></script>
   <script defer src="js/motion.js"></script>
@@ -25,7 +48,7 @@
   <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-fill"></span></div>
   <a class="skip" href="#main" id="skip">Skip to content</a>
   <header class="header">
-    <a class="logo" href="#home" aria-label="Marco Milad home"><span class="logo-mark">MM</span><span class="logo-name">MARCO <b>MILAD</b></span></a>
+    <a class="logo" href="#home" aria-label="Marco Milad home"><span class="logo-name">MARCO <b>MILAD</b></span></a>
     <nav id="nav" aria-label="Main navigation"></nav>
     <div class="controls"><button id="lang" class="lang-btn" type="button">العربية</button><button id="menu" class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open menu">☰</button></div>
   </header>
@@ -33,8 +56,8 @@
     <section class="hero wrap" id="home">
       <div class="hero-grid" aria-hidden="true"></div>
       <div class="hero-text">
+        <p class="hero-identity" aria-label="MARCO MILAD · FRONT-END DEVELOPER"><span class="hero-name-mask"><span class="hero-name-word">MARCO</span></span> <span class="hero-name-mask"><span class="hero-name-word hero-name-accent">MILAD</span></span><span class="hero-identity-role">· FRONT-END DEVELOPER</span></p>
         <p class="availability"><i></i><span id="available">Available for new projects</span></p>
-        <p class="overline">MARCO MILAD · FRONT-END DEVELOPER</p>
         <h1 id="headline">I build fast websites that turn visitors into customers.</h1>
         <p class="lead" id="intro">Front-end developer for small and growing businesses: landing pages, company sites and online stores, from design to launch.</p>
         <div class="actions"><a id="hero-wa" class="button primary" target="_blank" rel="noopener">Chat on WhatsApp <span aria-hidden="true">↗</span></a><a id="work-cta" class="button secondary" href="#work">See my work</a></div>
