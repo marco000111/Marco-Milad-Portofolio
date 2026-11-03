@@ -13,6 +13,12 @@ export default function usePointerTilt() {
       target.current.style.setProperty('--pointer-tilt-y', '0deg');
       target.current.style.setProperty('--pointer-light-x', '50%');
       target.current.style.setProperty('--pointer-light-y', '50%');
+      target.current.style.setProperty('--pointer-image-x', '0px');
+      target.current.style.setProperty('--pointer-image-y', '0px');
+      target.current.style.setProperty('--pointer-meta-x', '0px');
+      target.current.style.setProperty('--pointer-meta-y', '0px');
+      target.current.style.setProperty('--pointer-action-x', '0px');
+      target.current.style.setProperty('--pointer-action-y', '0px');
       target.current.classList.remove('is-tilting');
     }
     target.current = null;
@@ -34,6 +40,12 @@ export default function usePointerTilt() {
       element.style.setProperty('--pointer-tilt-x', `${(0.5 - y) * 6}deg`);
       element.style.setProperty('--pointer-light-x', `${x * 100}%`);
       element.style.setProperty('--pointer-light-y', `${y * 100}%`);
+      element.style.setProperty('--pointer-image-x', `${(0.5 - x) * 12}px`);
+      element.style.setProperty('--pointer-image-y', `${(0.5 - y) * 9}px`);
+      element.style.setProperty('--pointer-meta-x', `${(x - 0.5) * 5}px`);
+      element.style.setProperty('--pointer-meta-y', `${(y - 0.5) * 4}px`);
+      element.style.setProperty('--pointer-action-x', `${(0.5 - x) * 5}px`);
+      element.style.setProperty('--pointer-action-y', `${(0.5 - y) * 4}px`);
       element.classList.add('is-tilting');
     });
   }, []);

@@ -9,6 +9,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
+          'three-vendor': ['three'],
           'motion-vendor': ['framer-motion', 'gsap', 'lenis'],
           'ui-vendor': ['lucide-react', 'pdf-lib'],
         },
@@ -20,7 +21,7 @@ export default defineConfig({
     port: 5173,
     strictPort: true,
     watch: {
-      ignored: ['**/.work/**'],
+      ignored: ['**/.work/**', '**/assets/**'],
     },
   },
 });

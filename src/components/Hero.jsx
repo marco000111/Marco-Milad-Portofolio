@@ -8,6 +8,7 @@ import {
   useTransform,
 } from 'framer-motion';
 import { ArrowDown, ArrowRight, ArrowUpRight, MoveUpRight } from 'lucide-react';
+import ThreeNameScene from './ThreeNameScene.jsx';
 
 function MagneticLink({ href, children, className }) {
   const reduceMotion = useReducedMotion();
@@ -52,27 +53,31 @@ export default function Hero({ content, ui, language }) {
   const pointerY = useMotionValue(0);
   const portraitX = useSpring(useTransform(pointerX, [-1, 1], [7, -7]), { stiffness: 90, damping: 24 });
   const portraitY = useSpring(useTransform(pointerY, [-1, 1], [5, -5]), { stiffness: 90, damping: 24 });
-  const rotateY = useSpring(useTransform(pointerX, [-1, 1], [-2.2, 2.2]), { stiffness: 85, damping: 24 });
-  const rotateX = useSpring(useTransform(pointerY, [-1, 1], [1.6, -1.6]), { stiffness: 85, damping: 24 });
+  const rotateY = useSpring(useTransform(pointerX, [-1, 1], [-2.4, 2.4]), { stiffness: 85, damping: 24 });
+  const rotateX = useSpring(useTransform(pointerY, [-1, 1], [1.8, -1.8]), { stiffness: 85, damping: 24 });
 
   const movePortrait = (event) => {
     if (reduceMotion || event.pointerType !== 'mouse') return;
     const bounds = event.currentTarget.getBoundingClientRect();
     pointer.current = {
-      x: ((event.clientX - bounds.left) / bounds.width - 0.5) * 2,
-      y: ((event.clientY - bounds.top) / bounds.height - 0.5) * 2,
+      x: Math.max(-1, Math.min(1, ((event.clientX - bounds.left) / bounds.width - 0.5) * 2)),
+      y: Math.max(-1, Math.min(1, ((event.clientY - bounds.top) / bounds.height - 0.5) * 2)),
     };
     if (frame.current) return;
     frame.current = window.requestAnimationFrame(() => {
       frame.current = 0;
       pointerX.set(pointer.current.x);
       pointerY.set(pointer.current.y);
+      heroRef.current?.style.setProperty('--depth-shift-x', `${pointer.current.x * -22}px`);
+      heroRef.current?.style.setProperty('--depth-shift-y', `${pointer.current.y * -15}px`);
     });
   };
   const resetPortrait = () => {
     if (frame.current) window.cancelAnimationFrame(frame.current);
     frame.current = 0;
     pointer.current = { x: 0, y: 0 };
+    heroRef.current?.style.setProperty('--depth-shift-x', '0px');
+    heroRef.current?.style.setProperty('--depth-shift-y', '0px');
     pointerX.set(0);
     pointerY.set(0);
   };
@@ -95,6 +100,15 @@ export default function Hero({ content, ui, language }) {
         {Array.from({ length: 7 }, (_, index) => (
           <i key={index} style={{ '--particle-index': index, '--particle-x': `${8 + index * 12}%`, '--particle-y': `${19 + (index % 4) * 16}%` }} />
         ))}
+      </div>
+      <div className="hero-depth-world" aria-hidden="true">
+        <div className="hero-depth-backplane" />
+        <div className="hero-depth-orbit hero-depth-orbit-a" />
+        <div className="hero-depth-orbit hero-depth-orbit-b" />
+        <i className="hero-depth-object hero-depth-object-a" />
+        <i className="hero-depth-object hero-depth-object-b" />
+        <i className="hero-depth-object hero-depth-object-c" />
+        <i className="hero-depth-object hero-depth-object-d" />
       </div>
       <div className="hero-copy">
         <motion.p
@@ -119,11 +133,11 @@ export default function Hero({ content, ui, language }) {
           id="hero-heading"
           className="hero-name"
           dir="ltr"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.34, duration: 0.8, ease: [0.2, 0.8, 0.2, 1] }}
+          initial={{ opacity: 0, clipPath: 'inset(0 100% 0 0)' }}
+          animate={{ opacity: 1, clipPath: 'inset(0 0% 0 0)' }}
+          transition={{ delay: 0.34, duration: 0.9, ease: [0.2, 0.8, 0.2, 1] }}
         >
-          <span>MARCO</span> <b>MILAD</b>
+          <ThreeNameScene variant="hero" />
         </motion.h1>
         <h2 className="hero-heading" aria-label={ui.headline}>
           {words.map((word, index) => (
@@ -222,6 +236,11 @@ export default function Hero({ content, ui, language }) {
             fetchPriority="high"
             decoding="async"
           />
+          <div className="hero-foreground-points" aria-hidden="true">
+            <i />
+            <i />
+            <i />
+          </div>
         </motion.div>
       </motion.div>
       <a href="#about" className="hero-scroll" aria-label={ui.scroll}>

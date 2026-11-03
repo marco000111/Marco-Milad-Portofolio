@@ -3,13 +3,13 @@ import { LayoutGroup, MotionConfig, motion } from 'framer-motion';
 import About from './components/About.jsx';
 import Contact from './components/Contact.jsx';
 import CursorFollower from './components/CursorFollower.jsx';
+import CinematicIntro from './components/CinematicIntro.jsx';
 import DeferredAnalytics from './components/DeferredAnalytics.jsx';
 import Footer from './components/Footer.jsx';
 import Hero from './components/Hero.jsx';
 import ManifestoScene from './components/ManifestoScene.jsx';
 import Navbar from './components/Navbar.jsx';
 import Projects from './components/Projects.jsx';
-import Preloader from './components/Preloader.jsx';
 import Resume from './components/Resume.jsx';
 import ScrollProgress from './components/ScrollProgress.jsx';
 import ScrollDirector from './components/ScrollDirector.jsx';
@@ -78,7 +78,7 @@ export default function App() {
       <Footer copy={content} ui={ui} language={language} />
       <ScrollDirector />
       <CursorFollower />
-      <Preloader language={language} copy={ui} />
+      <CinematicIntro language={language} copy={ui} />
       <DeferredAnalytics />
     </div>
     </LayoutGroup>

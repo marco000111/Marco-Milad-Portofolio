@@ -1815,7 +1815,7 @@ html[dir="rtl"] .contact-heading h2 {
   place-items: center;
   overflow: hidden;
   background: radial-gradient(ellipse at 50% 48%, rgb(11 49 90 / 28%), transparent 58%), #030813;
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 .preloader-skip {

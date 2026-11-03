@@ -19,7 +19,7 @@ export default function ManifestoScene({ language }) {
         transition={{ duration: 0.9, ease: [0.2, 0.8, 0.2, 1] }}
         dir={isArabic ? 'rtl' : 'ltr'}
       >
-        {phrase}
+        <span className="manifesto-statement-inner">{phrase}</span>
       </motion.p>
       <div className={`manifesto-marquee${reducedMotion ? ' is-still' : ''}`} aria-hidden="true" dir="ltr">
         <div className="manifesto-marquee-track">

@@ -8,6 +8,7 @@ export default function ScrollDirector() {
   useEffect(() => {
     const media = gsap.matchMedia();
     media.add('(prefers-reduced-motion: no-preference)', () => {
+      const desktop = gsap.matchMedia();
       const context = gsap.context(() => {
         gsap.utils.toArray('.gsap-reveal').forEach((scene) => {
           const heading = scene.querySelector('.section-heading h2, .contact-heading h2');
@@ -85,12 +86,49 @@ export default function ScrollDirector() {
             },
           });
         }
+
+        gsap.utils.toArray('.project-art img').forEach((image) => {
+          gsap.fromTo(image, { filter: 'saturate(.76) brightness(.84)' }, {
+            filter: 'saturate(1.06) brightness(1)',
+            ease: 'none',
+            scrollTrigger: {
+              trigger: image.closest('.project-card'),
+              start: 'top 86%',
+              end: 'bottom 22%',
+              scrub: 0.65,
+            },
+          });
+        });
+      });
+
+      desktop.add('(min-width: 980px)', () => {
+        const manifesto = document.querySelector('.manifesto-scene');
+        const statement = manifesto?.querySelector('.manifesto-statement-inner');
+        if (!manifesto || !statement) return undefined;
+
+        const pinnedStory = gsap.timeline({
+          scrollTrigger: {
+            trigger: manifesto,
+            start: 'top top+=76',
+            end: () => `+=${Math.round(window.innerHeight * 0.62)}`,
+            pin: true,
+            pinSpacing: true,
+            scrub: 0.7,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+        pinnedStory
+          .fromTo(manifesto, { '--pin-glow': 0 }, { '--pin-glow': 1, ease: 'none', duration: 0.55 }, 0)
+          .fromTo(statement, { scale: 0.9, letterSpacing: '-.035em' }, { scale: 1.075, letterSpacing: '-.055em', ease: 'none', duration: 1 }, 0);
+        return () => pinnedStory.scrollTrigger?.kill();
       });
 
       const refresh = () => ScrollTrigger.refresh();
       window.addEventListener('portfolio:languagechange', refresh);
       return () => {
         window.removeEventListener('portfolio:languagechange', refresh);
+        desktop.revert();
         context.revert();
       };
     });

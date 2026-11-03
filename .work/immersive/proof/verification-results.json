@@ -1,0 +1,192 @@
+{
+  "checks": {
+    "introFreshSession": true,
+    "introDurationMs": 3102,
+    "introObservedDurationMs": 2875.4000000059605,
+    "introTransitionsIntoHero": true,
+    "introThree": {
+      "renderer": true,
+      "ready": "true",
+      "geometry": "TextGeometry",
+      "letterCount": "10",
+      "extrusionDepth": "0.2",
+      "beveled": "true"
+    },
+    "introAssemblyVisible": true,
+    "introSuppressedForExistingSession": true,
+    "forceReplayWorks": true,
+    "introSkipWorks": true,
+    "heroPerspective": {
+      "perspective": "1100px",
+      "transform": "matrix3d(0.999958, -0.000116043, 0.0091188, -8.28982e-06, 0, 0.999919, 0.0127247, -1.15679e-05, -0.00911954, -0.0127241, 0.999877, -0.00090898, 1.51958, 2.02525, 0, 1)",
+      "depthShiftX": "4.745461635272644px",
+      "backgroundPlane": true,
+      "depthObjects": 4,
+      "threeReady": "true",
+      "geometry": "TextGeometry",
+      "letterCount": "10",
+      "extrusionDepth": "0.14",
+      "geometryBounds": "8.255x0.928",
+      "geometryWidth": "8.255",
+      "geometryHeight": "0.928",
+      "uniformScale": "0.776",
+      "cameraDistance": "2.086",
+      "framedWidthRatio": "0.92",
+      "sceneBox": {
+        "x": 123.96875,
+        "y": 211.265625,
+        "width": 588.5,
+        "height": 76
+      }
+    },
+    "threePointerResponds": true,
+    "tabletThreeFits": true,
+    "projectLayers": {
+      "tiltClass": true,
+      "tiltX": "0.7964574492704997deg",
+      "tiltY": "1.3705855264411861deg",
+      "imageTransform": "matrix3d(1.075, 0, 0, 0, 0, 1.075, 0, 0, 0, 0, 1, 0, -2.34958, 1.19469, 38, 1)",
+      "metadataTransform": "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.97899, -0.530972, 52, 1)",
+      "reflection": "radial-gradient(circle at 69.5798% 36.7257%, rgba(136, 222, 255, 0.24), rgba(0, 0, 0, 0) 48%)"
+    },
+    "mobileProjectTapOpensDetails": true,
+    "mobileDocFitsViewport": true,
+    "reducedMotionSkipsIntro": true,
+    "webglFallbackWorks": true
+  },
+  "sectionProgress": [
+    {
+      "y": 488,
+      "active": "projects",
+      "pinSpacer": true,
+      "pinSceneAtTop": false
+    },
+    {
+      "y": 1004,
+      "active": "projects",
+      "pinSpacer": true,
+      "pinSceneAtTop": false
+    },
+    {
+      "y": 1507,
+      "active": "about",
+      "pinSpacer": true,
+      "pinSceneAtTop": false
+    },
+    {
+      "y": 2018,
+      "active": "about",
+      "pinSpacer": true,
+      "pinSceneAtTop": false
+    },
+    {
+      "y": 2529,
+      "pinSpacer": true,
+      "pinSceneAtTop": true
+    },
+    {
+      "y": 3041,
+      "pinSpacer": true,
+      "pinSceneAtTop": false
+    },
+    {
+      "y": 3553,
+      "active": "skills",
+      "pinSpacer": true,
+      "pinSceneAtTop": false
+    },
+    {
+      "y": 4070,
+      "active": "skills",
+      "pinSpacer": true,
+      "pinSceneAtTop": false
+    },
+    {
+      "y": 4583,
+      "active": "resume",
+      "pinSpacer": true,
+      "pinSceneAtTop": false
+    },
+    {
+      "y": 5096,
+      "active": "resume",
+      "pinSpacer": true,
+      "pinSceneAtTop": false
+    },
+    {
+      "y": 5610,
+      "active": "contact",
+      "pinSpacer": true,
+      "pinSceneAtTop": false
+    },
+    {
+      "y": 5774,
+      "active": "contact",
+      "pinSpacer": true,
+      "pinSceneAtTop": false
+    },
+    {
+      "y": 5784,
+      "active": "contact",
+      "pinSpacer": true,
+      "pinSceneAtTop": false
+    },
+    {
+      "y": 5784,
+      "active": "contact",
+      "pinSpacer": true,
+      "pinSceneAtTop": false
+    },
+    {
+      "y": 5784,
+      "active": "contact",
+      "pinSpacer": true,
+      "pinSceneAtTop": false
+    }
+  ],
+  "capturedFrames": {
+    "intro": 49,
+    "hero3d": 51,
+    "projects3d": 41,
+    "scroll": 218
+  },
+  "browserErrors": [
+    "Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+    "Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+    "Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+    "Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+    "Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+    "Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+    "Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED"
+  ],
+  "networkIssues": [
+    {
+      "error": "net::ERR_NETWORK_ACCESS_DENIED",
+      "url": "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+    },
+    {
+      "error": "net::ERR_NETWORK_ACCESS_DENIED",
+      "url": "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+    },
+    {
+      "error": "net::ERR_NETWORK_ACCESS_DENIED",
+      "url": "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+    },
+    {
+      "error": "net::ERR_NETWORK_ACCESS_DENIED",
+      "url": "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+    },
+    {
+      "error": "net::ERR_NETWORK_ACCESS_DENIED",
+      "url": "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+    },
+    {
+      "error": "net::ERR_NETWORK_ACCESS_DENIED",
+      "url": "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+    },
+    {
+      "error": "net::ERR_NETWORK_ACCESS_DENIED",
+      "url": "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+    }
+  ]
+}
