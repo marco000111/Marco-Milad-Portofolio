@@ -349,6 +349,7 @@ export default function ThreeNameScene({ variant = 'intro', onReady }) {
         timeline.to(sweepBeam.position, { x: sweepExtent, duration: 0.82, ease: 'power1.inOut' }, 1.38);
         timeline.to(camera.position, { z: cameraHomeZ * 0.94, x: 0.08, duration: 1.25, ease: 'power2.inOut' }, 1.28);
         timeline.to(wordGroup.rotation, { y: -0.035, x: 0.018, duration: 1.25, yoyo: true, repeat: 1, ease: 'sine.inOut' }, 1.4);
+        timeline.timeScale(0.83);
       } else {
         onReady?.();
       }

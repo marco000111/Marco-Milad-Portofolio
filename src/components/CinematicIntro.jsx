@@ -3,18 +3,11 @@ import { motion, useReducedMotion } from 'framer-motion';
 import ThreeNameScene from './ThreeNameScene.jsx';
 
 function shouldShowIntro() {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
-  const forceReplay = import.meta.env.DEV
-    && new URLSearchParams(window.location.search).get('intro') === 'force';
-  if (forceReplay) return true;
-  try {
-    return sessionStorage.getItem('portfolio-welcome-seen') !== '1';
-  } catch {
-    return false;
-  }
+  return !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
 const particles = Array.from({ length: 14 }, (_, index) => index);
+const INTRO_DURATION = 5300;
 const EXIT_DURATION = 400;
 
 export default function CinematicIntro({ language, copy }) {
@@ -27,11 +20,6 @@ export default function CinematicIntro({ language, copy }) {
   const finish = useCallback(() => {
     if (finished.current) return;
     finished.current = true;
-    try {
-      sessionStorage.setItem('portfolio-welcome-seen', '1');
-    } catch {
-      // The intro remains usable when storage is unavailable.
-    }
     document.body.classList.add('intro-transitioning');
     setExiting(true);
     exitTimer.current = window.setTimeout(() => {
@@ -51,8 +39,8 @@ export default function CinematicIntro({ language, copy }) {
       if (reducedMotion) setVisible(false);
       return undefined;
     }
-    // 2.3s scene choreography + 0.4s handoff; no simulated loading state.
-    const timer = window.setTimeout(finish, 2300);
+    // 5.3s of paced choreography + 0.4s handoff; no simulated loading state.
+    const timer = window.setTimeout(finish, INTRO_DURATION);
     const finishWhenHidden = () => { if (document.hidden) finish(); };
     document.addEventListener('visibilitychange', finishWhenHidden);
     return () => {
@@ -111,7 +99,7 @@ export default function CinematicIntro({ language, copy }) {
           className="preloader-kicker intro-kicker"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.42, delay: 0.08 }}
+          transition={{ duration: 0.59, delay: 0.11 }}
         >
           {language === 'ar' ? 'تطوير رقمي بإيقاع مختلف' : 'DIGITAL CRAFT, IN MOTION'}
         </motion.p>
@@ -122,7 +110,7 @@ export default function CinematicIntro({ language, copy }) {
           className="intro-portrait-window"
           initial={{ clipPath: 'inset(48% 0 48% 0)', opacity: 0.05, scale: 1.08 }}
           animate={{ clipPath: 'inset(0% 0 0% 0)', opacity: 0.82, scale: 1 }}
-          transition={{ duration: 0.82, delay: 0.96, ease: [0.2, 0.8, 0.2, 1] }}
+          transition={{ duration: 1.15, delay: 1.34, ease: [0.2, 0.8, 0.2, 1] }}
           aria-hidden="true"
         >
           <img src="/assets/images/marco-milad-portrait.png" alt="" width="1141" height="1378" />
@@ -132,7 +120,7 @@ export default function CinematicIntro({ language, copy }) {
           className="intro-caption"
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.42, duration: 0.42 }}
+          transition={{ delay: 1.99, duration: 0.59 }}
           dir={language === 'ar' ? 'rtl' : 'ltr'}
         >
           {language === 'ar' ? 'ماركو ميلاد · مطور واجهات أمامية' : 'MARCO MILAD · FRONT-END DEVELOPER'}
