@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { MotionConfig, motion, useReducedMotion } from 'framer-motion';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { LayoutGroup, MotionConfig, motion, useReducedMotion } from 'framer-motion';
 import About from './components/About.jsx';
 import Contact from './components/Contact.jsx';
 import DeferredAnalytics from './components/DeferredAnalytics.jsx';
@@ -8,6 +8,7 @@ import Hero from './components/Hero.jsx';
 import Navbar from './components/Navbar.jsx';
 import Preloader from './components/Preloader.jsx';
 import Projects from './components/Projects.jsx';
+import Resume from './components/Resume.jsx';
 import ScrollDirector from './components/ScrollDirector.jsx';
 import Skills from './components/Skills.jsx';
 import { getPortfolio } from './data/portfolio.js';
@@ -26,8 +27,6 @@ function getInitialLanguage() {
 export default function App() {
   const [language, setLanguage] = useState(getInitialLanguage);
   const [welcomeComplete, setWelcomeComplete] = useState(false);
-  const [languageSwitching, setLanguageSwitching] = useState(false);
-  const languageSwitchTimer = useRef(0);
   const reducedMotion = useReducedMotion();
   const portfolio = useMemo(() => getPortfolio(language), [language]);
   const { content, ui, projects, skills, skillCategories } = portfolio;
@@ -52,28 +51,25 @@ export default function App() {
     }
   }, [content.description, content.title, language]);
 
-  useEffect(() => () => window.clearTimeout(languageSwitchTimer.current), []);
-
-  const switchLanguage = useCallback((nextLanguage) => {
-    if (nextLanguage === language) return;
-    window.clearTimeout(languageSwitchTimer.current);
-    setLanguageSwitching(true);
-    setLanguage(nextLanguage);
-    languageSwitchTimer.current = window.setTimeout(() => setLanguageSwitching(false), 420);
-  }, [language]);
+  const selectLanguage = useCallback((nextLanguage) => {
+    if (nextLanguage === 'en' || nextLanguage === 'ar') setLanguage(nextLanguage);
+  }, []);
 
   return (
     <MotionConfig reducedMotion="user">
-    <div className={`app-shell min-h-screen bg-space text-ink${languageSwitching ? ' is-language-switching' : ''}`}>
-      <Navbar copy={ui} language={language} onLanguageChange={switchLanguage} />
+    <LayoutGroup id="portfolio-layout">
+    <div className="app-shell min-h-screen bg-space text-ink">
+      <Navbar copy={ui} language={language} onLanguageChange={selectLanguage} />
       <motion.main
         id="main"
+        layout="position"
         initial={reducedMotion ? false : { opacity: 0, y: 20 }}
         animate={welcomeComplete || reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0.88, y: 20 }}
-        transition={{ duration: 0.8, delay: welcomeComplete && !reducedMotion ? 0.08 : 0 }}
+        transition={{ duration: 0.45, delay: welcomeComplete && !reducedMotion ? 0.05 : 0 }}
       >
         <Hero content={content} ui={ui} language={language} />
-        <About content={content} ui={ui} language={language} projects={projects} />
+        <About content={content} ui={ui} language={language} />
+        <Resume language={language} />
         <Skills skills={skills} categories={skillCategories} ui={ui} language={language} />
         <Projects projects={projects} ui={ui} language={language} />
         <Contact ui={ui} language={language} />
@@ -87,6 +83,7 @@ export default function App() {
       />
       <DeferredAnalytics />
     </div>
+    </LayoutGroup>
     </MotionConfig>
   );
 }

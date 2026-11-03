@@ -17,10 +17,10 @@ export default function Projects({ projects, ui, language }) {
   const chooseFilter = (index) => setFilter(filters[index] || 'All');
 
   return (
-    <section id="projects" className="projects-section page-shell section-block gsap-reveal">
+    <motion.section id="projects" layout="position" className="projects-section page-shell section-block gsap-reveal">
       <div className="projects-header">
         <div className="section-heading">
-          <p className="section-kicker"><span>03</span> / {ui.projectsKicker}</p>
+          <p className="section-kicker"><span>04</span> / {ui.projectsKicker}</p>
           <h2>
             {language === 'ar' ? 'مختارة بعناية، <em>مبنية لغرض</em>' : <>Selected with purpose, <em>built to work</em></>}
           </h2>
@@ -110,6 +110,6 @@ export default function Projects({ projects, ui, language }) {
         <p className="empty-projects">{ui.noProjects}</p>
       )}
       <ProjectModal project={selectedProject} ui={ui} onClose={closeModal} />
-    </section>
+    </motion.section>
   );
 }

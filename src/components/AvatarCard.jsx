@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useInView, useMotionValue, useReducedMotion, useSpring, useTransform } from 'framer-motion';
 import { ArrowUpRight, BadgeCheck } from 'lucide-react';
 
-export default function AvatarCard({ language }) {
+export default function AvatarCard({ language, status }) {
   const reduceMotion = useReducedMotion();
   const [tiltEnabled, setTiltEnabled] = useState(false);
   const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 767px), (pointer: coarse)').matches);
@@ -44,9 +44,6 @@ export default function AvatarCard({ language }) {
   };
   const shouldFloat = !reduceMotion && isInView;
   const useMobileFloat = isMobile && shouldFloat;
-  const role = language === 'ar'
-    ? 'مطور واجهات أمامية ومصمم جرافيك'
-    : 'Front-End Developer & Graphic Designer';
 
   return (
     <div className="id-scene" aria-label={language === 'ar' ? 'بطاقة تعريف رقمية' : 'Digital developer ID card'}>
@@ -79,12 +76,11 @@ export default function AvatarCard({ language }) {
             <img
               className="avatar-illustration"
               src="/assets/images/marco-cyberpunk-avatar.jpeg"
-              alt={language === 'ar'
-                ? 'صورة ثلاثية الأبعاد بطابع سايبربانك بشعر مجعد ونظارة داكنة وإضاءة نيون'
-                : '3D cyberpunk portrait with curly hair, dark shield sunglasses, and neon-lit clothing'}
+              alt={language === 'ar' ? 'صورة ماركو الرمزية بأسلوب سايبربانك' : 'Marco’s 3D cyberpunk avatar with curly hair and neon-lit sunglasses'}
               width="768"
               height="1024"
               fetchPriority="high"
+              decoding="async"
             />
             <motion.span
               className="portrait-shine"
@@ -97,9 +93,9 @@ export default function AvatarCard({ language }) {
           </div>
           <div className="id-card-info">
             <div>
-              <span className="id-card-eyebrow">{language === 'ar' ? 'المصمم والمطور' : 'DESIGNER & DEVELOPER'}</span>
+              <span className="id-card-eyebrow">{language === 'ar' ? 'مطور ومصمم رقمي' : 'FRONT-END DEVELOPER & GRAPHIC DESIGNER'}</span>
               <h2 dir="ltr">MARCO <b>MILAD</b></h2>
-              <p className="id-card-role">{role}</p>
+              <p>{status}</p>
             </div>
             <span className="id-verified" aria-label={language === 'ar' ? 'معلومات شخصية' : 'Personal portfolio'}>
               <BadgeCheck size={19} />

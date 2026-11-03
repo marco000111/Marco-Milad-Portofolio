@@ -15,9 +15,9 @@ export default function Skills({ skills, categories, ui, language }) {
   const selectCategory = (index) => setSelected(categoryKeys[index] || 'All');
 
   return (
-    <section id="skills" className="skills-section page-shell section-block gsap-reveal">
+    <motion.section id="skills" layout="position" className="skills-section page-shell section-block gsap-reveal">
       <div className="section-heading section-heading-centered">
-        <p className="section-kicker"><span>02</span> / {ui.skillsKicker}</p>
+        <p className="section-kicker"><span>03</span> / {ui.skillsKicker}</p>
         <h2>
           {language === 'ar'
             ? <>تقنيات لواجهات <em>تعمل بجمال</em></>
@@ -70,6 +70,6 @@ export default function Skills({ skills, categories, ui, language }) {
           ? 'أختار الأدوات وفق احتياجات كل مشروع.'
           : 'Tools are selected to fit each project.'}
       </p>
-    </section>
+    </motion.section>
   );
 }

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
-const sectionIds = ['home', 'about', 'skills', 'projects', 'contact'];
+const sectionIds = ['home', 'about', 'resume', 'skills', 'projects', 'contact'];
 
 export default function Navbar({ copy, language, onLanguageChange }) {
   const [active, setActive] = useState('home');
@@ -79,24 +79,15 @@ export default function Navbar({ copy, language, onLanguageChange }) {
           })}
         </nav>
         <div className="nav-actions">
-          <div className="language-switcher" role="group" aria-label="Select language" dir="ltr">
-            <button
-              type="button"
-              aria-pressed={language === 'en'}
-              className={language === 'en' ? 'is-selected' : ''}
-              onClick={() => onLanguageChange('en')}
-            >
-              EN
-            </button>
+          <div
+            className="language-switcher"
+            role="group"
+            aria-label={language === 'ar' ? 'اختيار اللغة' : 'Choose language'}
+            dir="ltr"
+          >
+            <button type="button" aria-pressed={language === 'en'} onClick={() => onLanguageChange('en')}>EN</button>
             <span aria-hidden="true">|</span>
-            <button
-              type="button"
-              aria-pressed={language === 'ar'}
-              className={language === 'ar' ? 'is-selected' : ''}
-              onClick={() => onLanguageChange('ar')}
-            >
-              عربي
-            </button>
+            <button type="button" aria-pressed={language === 'ar'} onClick={() => onLanguageChange('ar')}>عربي</button>
           </div>
           <button
             className="menu-toggle"
@@ -137,7 +128,7 @@ export default function Navbar({ copy, language, onLanguageChange }) {
               ))}
             </div>
             <span className="mobile-nav-caption" dir="ltr">
-              MARCO MILAD · FRONT-END DEVELOPER
+              MARCO MILAD · FRONT-END DEVELOPER & GRAPHIC DESIGNER
             </span>
           </motion.nav>
         )}

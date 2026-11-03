@@ -55,9 +55,9 @@ export default function Contact({ ui, language }) {
   };
 
   return (
-    <section id="contact" className="contact-section page-shell section-block gsap-reveal">
+    <motion.section id="contact" layout="position" className="contact-section page-shell section-block gsap-reveal">
       <div className="contact-heading">
-        <p className="section-kicker"><span>04</span> / {ui.contactKicker}</p>
+        <p className="section-kicker"><span>05</span> / {ui.contactKicker}</p>
         <h2>{language === 'ar' ? <>لديك فكرة؟ <em>لنصنعها معًا.</em></> : <>Have an idea? <em>Let’s make it real.</em></>}</h2>
         <p>{ui.contactIntro}</p>
         <div className="contact-response">
@@ -143,6 +143,6 @@ export default function Contact({ ui, language }) {
           )}
         </AnimatePresence>
       </div>
-    </section>
+    </motion.section>
   );
 }

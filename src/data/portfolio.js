@@ -2,7 +2,8 @@ import { content } from '../../content.js';
 
 const ui = {
   en: {
-    nav: ['Home', 'About', 'Skills', 'Projects', 'Contact'],
+    nav: ['Home', 'About', 'Resume', 'Skills', 'Projects', 'Contact'],
+    heroRole: 'FRONT-END DEVELOPER & GRAPHIC DESIGNER',
     status: 'AVAILABLE FOR FREELANCE & FULL-TIME WORK',
     headline: 'Turning Vision Into Interactive Digital Reality',
     subheadline:
@@ -54,7 +55,8 @@ const ui = {
     webApplication: 'Web application',
   },
   ar: {
-    nav: ['الرئيسية', 'نبذة عني', 'المهارات', 'المشروعات', 'تواصل'],
+    nav: ['الرئيسية', 'نبذة عني', 'السيرة الذاتية', 'المهارات', 'المشروعات', 'تواصل'],
+    heroRole: 'مطور واجهات أمامية ومصمم جرافيك',
     status: 'متاح للعمل الحر والدوام الكامل',
     headline: 'أحوّل الأفكار إلى تجارب رقمية تفاعلية',
     subheadline:

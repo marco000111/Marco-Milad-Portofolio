@@ -39,7 +39,7 @@ export default function Hero({ content, ui, language }) {
   const words = useMemo(() => ui.headline.split(/\s+/), [ui.headline]);
 
   return (
-    <section id="home" className="hero-section page-shell" aria-labelledby="hero-heading">
+    <motion.section id="home" layout="position" className="hero-section page-shell" aria-labelledby="hero-heading">
       <div className="hero-background" aria-hidden="true">
         <div className="hero-grid" />
         <div className="hero-glow hero-glow-a" />
@@ -54,9 +54,9 @@ export default function Hero({ content, ui, language }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.16, duration: 0.7 }}
         >
-          <span className="hero-identity-name">MARCO <b>MILAD</b></span>
+          <span>MARCO <b>MILAD</b></span>
           <i>·</i>
-          <small>FRONT-END DEVELOPER &amp; GRAPHIC DESIGNER</small>
+          <small dir={language === 'ar' ? 'rtl' : 'ltr'}>{ui.heroRole}</small>
         </motion.p>
         <motion.div
           className="availability"
@@ -138,12 +138,12 @@ export default function Hero({ content, ui, language }) {
         animate={{ opacity: 1, x: 0, scale: 1 }}
         transition={{ delay: 0.52, duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
       >
-        <AvatarCard language={language} />
+        <AvatarCard language={language} status={ui.status} />
       </motion.div>
       <a href="#about" className="hero-scroll" aria-label={ui.scroll}>
         <span>{ui.scroll}</span>
         <ArrowDown size={16} aria-hidden="true" />
       </a>
-    </section>
+    </motion.section>
   );
 }

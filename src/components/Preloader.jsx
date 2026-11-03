@@ -155,12 +155,12 @@ export default function Preloader({ onComplete, language, copy }) {
       completionTimer = window.setTimeout(() => {
         setVisible(false);
         onComplete();
-      }, 160);
+      }, 100);
     };
 
     const startedAt = performance.now();
     const updateProgress = () => {
-      const next = Math.min(((performance.now() - startedAt) / 2500) * 100, 100);
+      const next = Math.min(((performance.now() - startedAt) / 1200) * 100, 100);
       setProgress(next);
       if (next >= 100) finish();
     };
@@ -221,7 +221,7 @@ export default function Preloader({ onComplete, language, copy }) {
           aria-label={copy.introLabel}
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 1.1, y: '-8vh' }}
-          transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
+          transition={{ duration: 0.35, ease: [0.76, 0, 0.24, 1] }}
         >
           <Starfield reducedMotion={reduceMotion} />
           <button ref={skipButtonRef} type="button" className="preloader-skip" onClick={skip}>
