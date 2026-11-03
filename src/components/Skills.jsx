@@ -1,11 +1,13 @@
-import { useMemo, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useMemo, useRef, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { ArrowUpRight, Boxes, Braces, Code2, Terminal } from 'lucide-react';
 
 const categoryIcons = [Boxes, Braces, Code2, Terminal];
 const categoryKeys = ['All', 'Frontend', 'Styling', 'Tools'];
 
 export default function Skills({ skills, categories, ui, language }) {
+  const sectionRef = useRef(null);
+  const sectionInView = useInView(sectionRef, { amount: 0.12 });
   const [selected, setSelected] = useState(categoryKeys[0]);
   const filtered = useMemo(
     () => selected === 'All' ? skills : skills.filter((skill) => skill.category === selected),
@@ -15,7 +17,12 @@ export default function Skills({ skills, categories, ui, language }) {
   const selectCategory = (index) => setSelected(categoryKeys[index] || 'All');
 
   return (
-    <motion.section id="skills" layout="position" className="skills-section page-shell section-block gsap-reveal">
+    <motion.section
+      ref={sectionRef}
+      id="skills"
+      layout="position"
+      className={`skills-section page-shell section-block gsap-reveal${sectionInView ? ' is-in-view' : ''}`}
+    >
       <div className="section-heading section-heading-centered">
         <p className="section-kicker"><span>03</span> / {ui.skillsKicker}</p>
         <h2>
@@ -54,7 +61,7 @@ export default function Skills({ skills, categories, ui, language }) {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: Math.min(index * 0.035, 0.25), duration: 0.35 }}
-            whileHover={{ scale: 1.045, y: -4 }}
+            whileHover={{ scale: 1.085, y: -5, rotateX: 7, rotateY: -8 }}
             style={{ '--skill-color': skill.color }}
           >
             <span className="skill-mark" aria-hidden="true">{skill.mark}</span>

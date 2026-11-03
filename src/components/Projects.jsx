@@ -1,9 +1,36 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, ArrowUpRight, ExternalLink, Github, Layers3 } from 'lucide-react';
+import usePointerTilt from '../hooks/usePointerTilt.js';
 import ProjectModal from './ProjectModal.jsx';
 
 const filters = ['All', 'Website', 'Web app'];
+
+function ProjectArtwork({ project, ui, index, onOpen }) {
+  const { onPointerMove, onPointerLeave } = usePointerTilt();
+  return (
+    <button
+      type="button"
+      className="project-art"
+      onClick={onOpen}
+      onPointerMove={onPointerMove}
+      onPointerLeave={onPointerLeave}
+      aria-label={`${ui.viewDetails}: ${project.title}`}
+    >
+      <img
+        src={project.image}
+        alt={project.imageAlt}
+        width="1280"
+        height="800"
+        loading={index > 1 ? 'lazy' : 'eager'}
+        decoding="async"
+      />
+      <span className="project-art-shade" />
+      <span className="project-art-meta"><Layers3 size={14} />{project.type}</span>
+      <span className="project-image-action"><ArrowUpRight size={18} /></span>
+    </button>
+  );
+}
 
 export default function Projects({ projects, ui, language }) {
   const [filter, setFilter] = useState(filters[0]);
@@ -61,24 +88,7 @@ export default function Projects({ projects, ui, language }) {
               viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.55, delay: (index % 3) * 0.07 }}
             >
-              <button
-                type="button"
-                className="project-art"
-                onClick={() => setSelectedProject(project)}
-                aria-label={`${ui.viewDetails}: ${project.title}`}
-              >
-                <img
-                  src={project.image}
-                  alt={project.imageAlt}
-                  width="1280"
-                  height="800"
-                  loading={index > 1 ? 'lazy' : 'eager'}
-                  decoding="async"
-                />
-                <span className="project-art-shade" />
-                <span className="project-art-meta"><Layers3 size={14} />{project.type}</span>
-                <span className="project-image-action"><ArrowUpRight size={18} /></span>
-              </button>
+              <ProjectArtwork project={project} ui={ui} index={index} onOpen={() => setSelectedProject(project)} />
               <div className="project-card-content">
                 <div className="project-title-line">
                   <div>

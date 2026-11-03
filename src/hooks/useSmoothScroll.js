@@ -8,27 +8,51 @@ gsap.registerPlugin(ScrollTrigger);
 export default function useSmoothScroll() {
   useEffect(() => {
     const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (motionPreference.matches) return undefined;
+    let lenis;
 
-    const lenis = new Lenis({
-      autoRaf: false,
-      duration: 1.05,
-      smoothWheel: true,
-      syncTouch: false,
-      wheelMultiplier: 0.9,
-      overscroll: false,
-    });
-    const onScroll = () => ScrollTrigger.update();
-    const onTick = (time) => lenis.raf(time * 1000);
-    lenis.on('scroll', onScroll);
-    gsap.ticker.add(onTick);
-    gsap.ticker.lagSmoothing(0);
+    const start = () => {
+      if (lenis || motionPreference.matches) return;
+      lenis = new Lenis({
+        autoRaf: false,
+        duration: 1.05,
+        smoothWheel: true,
+        syncTouch: false,
+        wheelMultiplier: 0.9,
+        overscroll: false,
+      });
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add(tick);
+      gsap.ticker.lagSmoothing(0);
+      if (document.hidden) lenis.stop();
+    };
 
-    return () => {
-      lenis.off('scroll', onScroll);
-      gsap.ticker.remove(onTick);
+    const stop = () => {
+      if (!lenis) return;
+      lenis.off('scroll', ScrollTrigger.update);
+      gsap.ticker.remove(tick);
       gsap.ticker.lagSmoothing(500, 33);
       lenis.destroy();
+      lenis = undefined;
+    };
+
+    function tick(time) {
+      lenis?.raf(time * 1000);
+    }
+
+    const updateMotion = () => motionPreference.matches ? stop() : start();
+    const updateVisibility = () => {
+      if (document.hidden) lenis?.stop();
+      else if (!motionPreference.matches) lenis?.start();
+    };
+
+    motionPreference.addEventListener?.('change', updateMotion);
+    document.addEventListener('visibilitychange', updateVisibility);
+    start();
+
+    return () => {
+      motionPreference.removeEventListener?.('change', updateMotion);
+      document.removeEventListener('visibilitychange', updateVisibility);
+      stop();
     };
   }, []);
 }

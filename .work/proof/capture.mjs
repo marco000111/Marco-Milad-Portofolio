@@ -1,8 +1,10 @@
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, unlink, writeFile } from 'node:fs/promises';
 import { createServer } from 'node:http';
 
-const root = 'M:/My Portofolio/.work/proof';
+const root = 'M:/My Portofolio/.work/immersive/proof';
 await mkdir(root, { recursive: true });
+const webmPath = `${root}/marco-milad-immersive-experience.webm`;
+await unlink(webmPath).catch(() => {});
 const pages = await fetch('http://127.0.0.1:9224/json').then((response) => response.json());
 const page = pages.find((item) => item.type === 'page');
 if (!page) throw new Error('No Edge page target found on port 9224.');
@@ -65,9 +67,21 @@ await send('Runtime.enable');
 await send('Log.enable');
 await send('Network.enable');
 await send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 1000, deviceScaleFactor: 1, mobile: false });
-await evaluate(`localStorage.removeItem('portfolio-language')`);
 await send('Page.navigate', { url: 'http://127.0.0.1:5173/' });
-await wait(2200);
+await wait(350);
+await evaluate(`localStorage.removeItem('portfolio-language'); sessionStorage.removeItem('portfolio-welcome-seen')`);
+await send('Page.reload', { ignoreCache: true });
+await wait(450);
+await wait(550);
+await screenshot('desktop-intro');
+const introInitiallyVisible = await evaluate(`Boolean(document.querySelector('.cinematic-intro'))`);
+await evaluate(`document.querySelector('.preloader-skip')?.click()`);
+await wait(420);
+const introSkipWorks = await evaluate(`!document.querySelector('.cinematic-intro') && sessionStorage.getItem('portfolio-welcome-seen') === '1'`);
+await send('Page.reload', { ignoreCache: true });
+await wait(500);
+const introOnlyOncePerSession = await evaluate(`!document.querySelector('.cinematic-intro')`);
+await wait(1100);
 await screenshot('desktop-home');
 
 const initialState = await evaluate(`(() => ({
@@ -84,7 +98,17 @@ for (const [id, name] of [['projects', 'desktop-projects'], ['about', 'desktop-a
   await screenshot(name);
 }
 
-const interactionResults = {};
+const interactionResults = { introInitiallyVisible, introSkipWorks, introOnlyOncePerSession };
+interactionResults.desktopCursorMounted = await evaluate(`document.body.classList.contains('has-cursor-follower')`);
+await evaluate(`document.querySelector('#projects')?.scrollIntoView({ behavior: 'instant', block: 'start' })`);
+await wait(350);
+await evaluate(`(() => { const card = document.querySelector('.project-art'); const rect = card.getBoundingClientRect(); card.dispatchEvent(new PointerEvent('pointermove', { bubbles: true, pointerType: 'mouse', clientX: rect.left + rect.width * .8, clientY: rect.top + rect.height * .25 })); })()`);
+await wait(100);
+interactionResults.projectTiltResponds = await evaluate(`Boolean(document.querySelector('.project-art.is-tilting')) && document.querySelector('.project-art')?.style.getPropertyValue('--pointer-light-x') !== ''`);
+await evaluate(`(() => document.querySelector('#skills')?.scrollIntoView({ behavior: 'instant', block: 'start' }))()`);
+await wait(700);
+await evaluate(`(() => document.querySelector('.skill-filter button:nth-child(2)')?.click())()`);
+interactionResults.skillFilterWorks = await evaluate(`document.querySelectorAll('.skill-card').length > 0 && document.querySelector('.skill-filter button:nth-child(2)')?.getAttribute('aria-pressed') === 'true'`);
 await evaluate(`(() => document.querySelector('.project-filter button:nth-child(2)')?.click())()`);
 await wait(500);
 interactionResults.websiteFilterCount = await evaluate(`document.querySelectorAll('.project-card').length`);
@@ -92,7 +116,7 @@ await evaluate(`(() => document.querySelector('.project-action-detail')?.click()
 await wait(500);
 interactionResults.projectDialogOpened = await evaluate(`Boolean(document.querySelector('[role="dialog"]'))`);
 await evaluate(`document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))`);
-await wait(400);
+await wait(700);
 interactionResults.projectDialogClosed = await evaluate(`!document.querySelector('[role="dialog"]')`);
 await evaluate(`(() => document.querySelector('.project-filter button:first-child')?.click())()`);
 await wait(350);
@@ -119,15 +143,21 @@ for (const width of [360, 768]) {
 }
 await send('Emulation.setEmulatedMedia', { media: 'screen', features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] });
 interactionResults.reducedMotionDisablesMarquee = await evaluate(`getComputedStyle(document.querySelector('.manifesto-marquee-track')).animationDuration === '1e-05s' || getComputedStyle(document.querySelector('.manifesto-marquee-track')).animationDuration === '0.00001s'`);
+await evaluate(`sessionStorage.removeItem('portfolio-welcome-seen')`);
+await send('Page.reload', { ignoreCache: true });
+await wait(500);
+interactionResults.reducedMotionSkipsIntro = await evaluate(`!document.querySelector('.cinematic-intro')`);
 await send('Emulation.setEmulatedMedia', { media: 'screen', features: [{ name: 'prefers-reduced-motion', value: 'no-preference' }] });
 
 await send('Emulation.setDeviceMetricsOverride', { width: 1280, height: 800, deviceScaleFactor: 1, mobile: false });
 await evaluate(`(() => document.querySelector('.language-switcher button[aria-pressed="false"]')?.click())()`);
 await wait(500);
 await evaluate(`window.scrollTo({ top: 0, behavior: 'instant' })`);
-await wait(700);
+await evaluate(`sessionStorage.removeItem('portfolio-welcome-seen')`);
+await send('Page.reload', { ignoreCache: true });
+await wait(350);
 await send('Page.startScreencast', { format: 'jpeg', quality: 68, maxWidth: 1280, maxHeight: 800, everyNthFrame: 5 });
-await wait(1300);
+await wait(2250);
 for (const [selector, delay] of [
   ['.desktop-nav a[href="#projects"]', 1900],
   ['.desktop-nav a[href="#about"]', 2100],
@@ -144,7 +174,6 @@ await send('Page.stopScreencast');
 await wait(300);
 interactionResults.recordedFrames = screencastFrames.length;
 
-const webmPath = `${root}/marco-milad-reference-experience.webm`;
 const recorderHtml = `<!doctype html><meta charset="utf-8"><title>Building motion proof</title><canvas width="1280" height="800"></canvas><script type="module">
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
@@ -160,6 +189,8 @@ recorder.start();
 for (const frame of images) { context.drawImage(frame, 0, 0, canvas.width, canvas.height); await new Promise((resolve) => setTimeout(resolve, 1000 / 12)); }
 recorder.stop();
 </script>`;
+let finishUpload;
+const uploaded = new Promise((resolve) => { finishUpload = resolve; });
 const recordServer = createServer(async (request, response) => {
   const url = new URL(request.url || '/', 'http://127.0.0.1:4175');
   if (request.method === 'GET' && url.pathname === '/') {
@@ -175,19 +206,21 @@ const recordServer = createServer(async (request, response) => {
     response.end(Buffer.from(frame, 'base64'));
     return;
   }
+  if (request.method === 'GET' && url.pathname === '/favicon.ico') { response.writeHead(204).end(); return; }
   if (request.method === 'POST' && url.pathname === '/save') {
     const chunks = [];
     for await (const chunk of request) chunks.push(chunk);
     await writeFile(webmPath, Buffer.concat(chunks));
     response.writeHead(201, { 'content-type': 'text/plain' });
-    response.end('saved');
+    response.end('saved', finishUpload);
     return;
   }
   response.writeHead(404).end();
 });
 await new Promise((resolve) => recordServer.listen(4175, '127.0.0.1', resolve));
 await send('Page.navigate', { url: 'http://127.0.0.1:4175/' });
-for (let attempt = 0; attempt < 80 && !await import('node:fs/promises').then(({ stat }) => stat(webmPath).then(() => true, () => false)); attempt++) await wait(500);
+await Promise.race([uploaded, wait(30000).then(() => { throw new Error('The browser recording did not upload within 30 seconds.'); })]);
+await wait(350);
 const recording = await import('node:fs/promises').then(({ stat }) => stat(webmPath));
 interactionResults.recordingBytes = recording.size;
 interactionResults.browserErrors = browserErrors;
@@ -195,4 +228,5 @@ interactionResults.networkIssues = networkIssues;
 recordServer.close();
 
 console.log(JSON.stringify({ initialState, interactionResults }, null, 2));
+await writeFile(`${root}/browser-results.json`, JSON.stringify({ initialState, interactionResults }, null, 2));
 socket.close();

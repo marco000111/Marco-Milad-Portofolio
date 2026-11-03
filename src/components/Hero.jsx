@@ -1,9 +1,11 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import {
   motion,
+  useInView,
   useMotionValue,
   useReducedMotion,
   useSpring,
+  useTransform,
 } from 'framer-motion';
 import { ArrowDown, ArrowRight, ArrowUpRight, MoveUpRight } from 'lucide-react';
 
@@ -42,24 +44,58 @@ function MagneticLink({ href, children, className }) {
 export default function Hero({ content, ui, language }) {
   const words = useMemo(() => ui.headline.split(/\s+/), [ui.headline]);
   const reduceMotion = useReducedMotion();
+  const heroRef = useRef(null);
+  const frame = useRef(0);
+  const pointer = useRef({ x: 0, y: 0 });
+  const inView = useInView(heroRef, { amount: 0.08 });
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
-  const portraitX = useSpring(pointerX, { stiffness: 90, damping: 24 });
-  const portraitY = useSpring(pointerY, { stiffness: 90, damping: 24 });
+  const portraitX = useSpring(useTransform(pointerX, [-1, 1], [7, -7]), { stiffness: 90, damping: 24 });
+  const portraitY = useSpring(useTransform(pointerY, [-1, 1], [5, -5]), { stiffness: 90, damping: 24 });
+  const rotateY = useSpring(useTransform(pointerX, [-1, 1], [-2.2, 2.2]), { stiffness: 85, damping: 24 });
+  const rotateX = useSpring(useTransform(pointerY, [-1, 1], [1.6, -1.6]), { stiffness: 85, damping: 24 });
 
   const movePortrait = (event) => {
     if (reduceMotion || event.pointerType !== 'mouse') return;
     const bounds = event.currentTarget.getBoundingClientRect();
-    pointerX.set(((event.clientX - bounds.left) / bounds.width - 0.5) * 9);
-    pointerY.set(((event.clientY - bounds.top) / bounds.height - 0.5) * 7);
+    pointer.current = {
+      x: ((event.clientX - bounds.left) / bounds.width - 0.5) * 2,
+      y: ((event.clientY - bounds.top) / bounds.height - 0.5) * 2,
+    };
+    if (frame.current) return;
+    frame.current = window.requestAnimationFrame(() => {
+      frame.current = 0;
+      pointerX.set(pointer.current.x);
+      pointerY.set(pointer.current.y);
+    });
   };
   const resetPortrait = () => {
+    if (frame.current) window.cancelAnimationFrame(frame.current);
+    frame.current = 0;
+    pointer.current = { x: 0, y: 0 };
     pointerX.set(0);
     pointerY.set(0);
   };
 
+  useEffect(() => () => {
+    if (frame.current) window.cancelAnimationFrame(frame.current);
+  }, []);
+
   return (
-    <motion.section id="home" layout="position" className="hero-section page-shell" aria-labelledby="hero-heading">
+    <motion.section
+      ref={heroRef}
+      id="home"
+      layout="position"
+      className={`hero-section page-shell${inView ? ' is-in-view' : ''}`}
+      aria-labelledby="hero-heading"
+      onPointerMove={movePortrait}
+      onPointerLeave={resetPortrait}
+    >
+      <div className="hero-particles" aria-hidden="true">
+        {Array.from({ length: 7 }, (_, index) => (
+          <i key={index} style={{ '--particle-index': index, '--particle-x': `${8 + index * 12}%`, '--particle-y': `${19 + (index % 4) * 16}%` }} />
+        ))}
+      </div>
       <div className="hero-copy">
         <motion.p
           className="hero-identity"
@@ -159,10 +195,20 @@ export default function Hero({ content, ui, language }) {
         initial={{ opacity: 0, clipPath: 'inset(5% 0 0 0)' }}
         animate={{ opacity: 1, clipPath: 'inset(0% 0 0 0)' }}
         transition={{ delay: 0.18, duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-        onPointerMove={movePortrait}
-        onPointerLeave={resetPortrait}
       >
-        <div className="hero-portrait-stage">
+        <motion.div
+          className="hero-portrait-stage"
+          style={{ x: portraitX, y: portraitY, rotateX, rotateY, transformPerspective: 1100 }}
+        >
+          <img
+            className="hero-portrait-echo"
+            src="/assets/images/marco-milad-portrait.png"
+            alt=""
+            aria-hidden="true"
+            width="1141"
+            height="1378"
+            decoding="async"
+          />
           <motion.img
             className="hero-portrait"
             src="/assets/images/marco-milad-portrait.png"
@@ -175,9 +221,8 @@ export default function Hero({ content, ui, language }) {
             height="1378"
             fetchPriority="high"
             decoding="async"
-            style={{ x: portraitX, y: portraitY }}
           />
-        </div>
+        </motion.div>
       </motion.div>
       <a href="#about" className="hero-scroll" aria-label={ui.scroll}>
         <span>{ui.scroll}</span>

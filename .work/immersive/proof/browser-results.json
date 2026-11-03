@@ -1,0 +1,89 @@
+{
+  "initialState": {
+    "title": "Marco Milad — Front-end Developer for Growing Businesses",
+    "heroImage": {
+      "complete": true,
+      "naturalWidth": 1141,
+      "opacity": "1"
+    },
+    "heroName": {
+      "opacity": "1",
+      "rect": {
+        "x": 58.59375,
+        "y": 365.71875,
+        "width": 1307.796875,
+        "height": 95.640625,
+        "top": 365.71875,
+        "right": 1366.390625,
+        "bottom": 461.359375,
+        "left": 58.59375
+      }
+    },
+    "sections": [
+      "home",
+      "projects",
+      "about",
+      "manifesto-scene gsap-reveal",
+      "skills",
+      "resume",
+      "contact"
+    ],
+    "width": {
+      "inner": 1440,
+      "document": 1425
+    }
+  },
+  "interactionResults": {
+    "introInitiallyVisible": true,
+    "introSkipWorks": true,
+    "introOnlyOncePerSession": true,
+    "desktopCursorMounted": true,
+    "projectTiltResponds": true,
+    "skillFilterWorks": true,
+    "websiteFilterCount": 3,
+    "projectDialogOpened": true,
+    "projectDialogClosed": true,
+    "projectRailAdvanced": true,
+    "requiredContactFieldsPreventSubmit": true,
+    "arabicDirection": {
+      "lang": "ar",
+      "dir": "rtl",
+      "overflow": true
+    },
+    "overflow-360": true,
+    "overflow-768": true,
+    "reducedMotionDisablesMarquee": true,
+    "reducedMotionSkipsIntro": true,
+    "recordedFrames": 134,
+    "recordingBytes": 1241020,
+    "browserErrors": [
+      "Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+      "Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+      "Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+      "Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED",
+      "Failed to load resource: net::ERR_NETWORK_ACCESS_DENIED"
+    ],
+    "networkIssues": [
+      {
+        "error": "net::ERR_NETWORK_ACCESS_DENIED",
+        "url": "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+      },
+      {
+        "error": "net::ERR_NETWORK_ACCESS_DENIED",
+        "url": "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+      },
+      {
+        "error": "net::ERR_NETWORK_ACCESS_DENIED",
+        "url": "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+      },
+      {
+        "error": "net::ERR_NETWORK_ACCESS_DENIED",
+        "url": "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+      },
+      {
+        "error": "net::ERR_NETWORK_ACCESS_DENIED",
+        "url": "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+      }
+    ]
+  }
+}

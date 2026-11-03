@@ -1,13 +1,16 @@
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
+import { useRef } from 'react';
 
 export default function ManifestoScene({ language }) {
+  const sceneRef = useRef(null);
+  const inView = useInView(sceneRef, { amount: 0.1 });
   const reducedMotion = useReducedMotion();
   const isArabic = language === 'ar';
   const phrase = isArabic ? 'كل فكرة تستحق أن ترى النور' : 'An idea deserves to become real';
   const loop = isArabic ? 'اصنع شيئًا له معنى' : 'MAKE SOMETHING THAT MATTERS';
 
   return (
-    <section className="manifesto-scene" aria-label={isArabic ? 'رؤية ماركو' : 'Marco’s point of view'}>
+    <section ref={sceneRef} className={`manifesto-scene gsap-reveal${inView ? ' is-in-view' : ''}`} aria-label={isArabic ? 'رؤية ماركو' : 'Marco’s point of view'}>
       <motion.p
         className="manifesto-statement"
         initial={false}

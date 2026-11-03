@@ -2,13 +2,16 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { LayoutGroup, MotionConfig, motion } from 'framer-motion';
 import About from './components/About.jsx';
 import Contact from './components/Contact.jsx';
+import CursorFollower from './components/CursorFollower.jsx';
 import DeferredAnalytics from './components/DeferredAnalytics.jsx';
 import Footer from './components/Footer.jsx';
 import Hero from './components/Hero.jsx';
 import ManifestoScene from './components/ManifestoScene.jsx';
 import Navbar from './components/Navbar.jsx';
 import Projects from './components/Projects.jsx';
+import Preloader from './components/Preloader.jsx';
 import Resume from './components/Resume.jsx';
+import ScrollProgress from './components/ScrollProgress.jsx';
 import ScrollDirector from './components/ScrollDirector.jsx';
 import Skills from './components/Skills.jsx';
 import { getPortfolio } from './data/portfolio.js';
@@ -45,6 +48,7 @@ export default function App() {
     } catch {
       // The selected language remains active for the current page view.
     }
+    window.dispatchEvent(new Event('portfolio:languagechange'));
   }, [content.description, content.title, language]);
 
   const selectLanguage = useCallback((nextLanguage) => {
@@ -56,6 +60,7 @@ export default function App() {
     <LayoutGroup id="portfolio-layout">
     <div className="app-shell min-h-screen bg-space text-ink">
       <Navbar copy={ui} language={language} onLanguageChange={selectLanguage} />
+      <ScrollProgress language={language} />
       <motion.main
         id="main"
         layout="position"
@@ -72,6 +77,8 @@ export default function App() {
       </motion.main>
       <Footer copy={content} ui={ui} language={language} />
       <ScrollDirector />
+      <CursorFollower />
+      <Preloader language={language} copy={ui} />
       <DeferredAnalytics />
     </div>
     </LayoutGroup>

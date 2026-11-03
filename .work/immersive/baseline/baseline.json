@@ -1,0 +1,19 @@
+{
+  "title": "Marco Milad — Front-end Developer for Growing Businesses",
+  "sections": [
+    "home",
+    "projects",
+    "about",
+    "manifesto-scene",
+    "skills",
+    "resume",
+    "contact"
+  ],
+  "imageLoaded": true,
+  "documentWidth": 1425,
+  "viewportWidth": 1440,
+  "mobileWidth": {
+    "documentWidth": 360,
+    "viewportWidth": 360
+  }
+}
