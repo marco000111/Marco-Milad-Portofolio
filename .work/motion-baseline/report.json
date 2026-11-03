@@ -1,0 +1,181 @@
+{
+  "capturedAt": "2026-11-02T21:42:38.413Z",
+  "sites": [
+    {
+      "name": "portfolio",
+      "status": 200,
+      "initial": {
+        "title": "Marco Milad — Front-end Developer for Growing Businesses",
+        "lang": "en",
+        "dir": "ltr",
+        "scrollWidth": 1440,
+        "scrollHeight": 6348,
+        "bodyText": 4198,
+        "buttons": 9,
+        "forms": 1
+      },
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "language": {
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "mobileNav": {
+        "expanded": "true",
+        "overflow": false
+      }
+    },
+    {
+      "name": "restaurant",
+      "status": 200,
+      "initial": {
+        "title": "Saffron & Stone — A table worth sharing",
+        "lang": "en",
+        "dir": "ltr",
+        "scrollWidth": 1440,
+        "scrollHeight": 4452,
+        "bodyText": 2052,
+        "buttons": 6,
+        "forms": 1
+      },
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "language": {
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "mobile": {
+        "overflow": false
+      }
+    },
+    {
+      "name": "clinic",
+      "status": 200,
+      "initial": {
+        "title": "Noura Dental — Care that puts you at ease",
+        "lang": "en",
+        "dir": "ltr",
+        "scrollWidth": 1440,
+        "scrollHeight": 4820,
+        "bodyText": 2679,
+        "buttons": 2,
+        "forms": 1
+      },
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "language": {
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "mobile": {
+        "overflow": false
+      }
+    },
+    {
+      "name": "store",
+      "status": 200,
+      "initial": {
+        "title": "Common Goods — Make room for the everyday",
+        "lang": "en",
+        "dir": "ltr",
+        "scrollWidth": 1440,
+        "scrollHeight": 3726,
+        "bodyText": 2735,
+        "buttons": 35,
+        "forms": 2
+      },
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "pageErrors": [],
+      "failedRequests": [],
+      "language": {
+        "lang": "ar",
+        "dir": "rtl"
+      },
+      "mobile": {
+        "overflow": false
+      }
+    }
+  ],
+  "noJavaScript": [
+    {
+      "site": "/",
+      "text": 534,
+      "bodyVisible": "visible",
+      "opacity": "1"
+    },
+    {
+      "site": "/demos/restaurant/",
+      "text": 1283,
+      "bodyVisible": "visible",
+      "opacity": "1"
+    },
+    {
+      "site": "/demos/clinic/",
+      "text": 2679,
+      "bodyVisible": "visible",
+      "opacity": "1"
+    },
+    {
+      "site": "/demos/store/",
+      "text": 1475,
+      "bodyVisible": "visible",
+      "opacity": "1"
+    }
+  ],
+  "lighthouse": {
+    "version": "12.8.2",
+    "sites": {
+      "main": {
+        "scores": {
+          "performance": 99,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "LCP": 2255,
+        "CLS": 0.021,
+        "TBT": 20
+      },
+      "restaurant": {
+        "scores": {
+          "performance": 98,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "LCP": 2480,
+        "CLS": 0,
+        "TBT": 0
+      },
+      "clinic": {
+        "scores": {
+          "performance": 100,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "LCP": 1355,
+        "CLS": 0,
+        "TBT": 0
+      },
+      "store": {
+        "scores": {
+          "performance": 99,
+          "accessibility": 100,
+          "best-practices": 100,
+          "seo": 100
+        },
+        "LCP": 2180,
+        "CLS": 0,
+        "TBT": 0
+      }
+    }
+  }
+}

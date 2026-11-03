@@ -1,0 +1,259 @@
+{
+  "sites": [
+    {
+      "name": "portfolio",
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "pageErrors": [],
+      "viewports": {
+        "en-360": false,
+        "en-390": false,
+        "en-768": false,
+        "en-1024": false,
+        "en-1440": false,
+        "en-1920": false,
+        "en2-360": false,
+        "en2-390": false,
+        "en2-768": false,
+        "en2-1024": false,
+        "en2-1440": false,
+        "en2-1920": false,
+        "ar-360": false,
+        "ar-390": false,
+        "ar-768": false,
+        "ar-1024": false,
+        "ar-1440": false,
+        "ar-1920": false
+      },
+      "initialTriggers": 11,
+      "introAfterWatchdog": 0,
+      "language": {
+        "lang": "en",
+        "dir": "ltr",
+        "triggersAfterRapid": 11,
+        "triggersAfterSecondCycle": 11,
+        "ar": {
+          "lang": "ar",
+          "dir": "rtl"
+        }
+      },
+      "contactForm": true,
+      "finalErrors": {
+        "errors": [],
+        "warnings": [],
+        "pageErrors": []
+      }
+    },
+    {
+      "name": "restaurant",
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "pageErrors": [],
+      "viewports": {
+        "en-360": false,
+        "en-390": false,
+        "en-768": false,
+        "en-1024": false,
+        "en-1440": false,
+        "en-1920": false,
+        "en2-360": false,
+        "en2-390": false,
+        "en2-768": false,
+        "en2-1024": false,
+        "en2-1440": false,
+        "en2-1920": false,
+        "ar-360": false,
+        "ar-390": false,
+        "ar-768": false,
+        "ar-1024": false,
+        "ar-1440": false,
+        "ar-1920": false
+      },
+      "initialTriggers": 5,
+      "introAfterWatchdog": 0,
+      "language": {
+        "lang": "en",
+        "dir": "ltr",
+        "triggersAfterRapid": 5,
+        "triggersAfterSecondCycle": 5,
+        "ar": {
+          "lang": "ar",
+          "dir": "rtl"
+        }
+      },
+      "filterCount": 3,
+      "reservation": true,
+      "finalErrors": {
+        "errors": [],
+        "warnings": [],
+        "pageErrors": []
+      }
+    },
+    {
+      "name": "clinic",
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "pageErrors": [],
+      "viewports": {
+        "en-360": false,
+        "en-390": false,
+        "en-768": false,
+        "en-1024": false,
+        "en-1440": false,
+        "en-1920": false,
+        "en2-360": false,
+        "en2-390": false,
+        "en2-768": false,
+        "en2-1024": false,
+        "en2-1440": false,
+        "en2-1920": false,
+        "ar-360": false,
+        "ar-390": false,
+        "ar-768": false,
+        "ar-1024": false,
+        "ar-1440": false,
+        "ar-1920": false
+      },
+      "initialTriggers": 10,
+      "introAfterWatchdog": 0,
+      "language": {
+        "lang": "en",
+        "dir": "ltr",
+        "triggersAfterRapid": 10,
+        "triggersAfterSecondCycle": 10,
+        "ar": {
+          "lang": "ar",
+          "dir": "rtl"
+        }
+      },
+      "booking": true,
+      "finalErrors": {
+        "errors": [],
+        "warnings": [],
+        "pageErrors": []
+      }
+    },
+    {
+      "name": "store",
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "pageErrors": [],
+      "viewports": {
+        "en-360": false,
+        "en-390": false,
+        "en-768": false,
+        "en-1024": false,
+        "en-1440": false,
+        "en-1920": false,
+        "en2-360": false,
+        "en2-390": false,
+        "en2-768": false,
+        "en2-1024": false,
+        "en2-1440": false,
+        "en2-1920": false,
+        "ar-360": false,
+        "ar-390": false,
+        "ar-768": false,
+        "ar-1024": false,
+        "ar-1440": false,
+        "ar-1920": false
+      },
+      "initialTriggers": 4,
+      "introAfterWatchdog": 0,
+      "language": {
+        "lang": "en",
+        "dir": "ltr",
+        "triggersAfterRapid": 4,
+        "triggersAfterSecondCycle": 4,
+        "ar": {
+          "lang": "ar",
+          "dir": "rtl"
+        }
+      },
+      "search": true,
+      "filterCount": 3,
+      "cartOpen": true,
+      "cartCount": "٢",
+      "newsletter": true,
+      "finalErrors": {
+        "errors": [],
+        "warnings": [],
+        "pageErrors": []
+      }
+    }
+  ],
+  "failureModes": [
+    {
+      "mode": "gsap-missing",
+      "state": {
+        "heading": "I build fast websites that turn visitors into customers.",
+        "headingVisible": true,
+        "skipCount": 0,
+        "introCount": 0,
+        "triggerCount": 0,
+        "bodyOpacity": "1"
+      }
+    },
+    {
+      "mode": "plugin-missing",
+      "state": {
+        "heading": "I build fast websites that turn visitors into customers.",
+        "headingVisible": true,
+        "skipCount": 0,
+        "introCount": 0,
+        "triggerCount": 0,
+        "bodyOpacity": "1"
+      }
+    },
+    {
+      "mode": "reduced-motion",
+      "state": {
+        "heading": "I build fast websites that turn visitors into customers.",
+        "headingVisible": true,
+        "skipCount": 0,
+        "introCount": 0,
+        "triggerCount": 0,
+        "bodyOpacity": "1"
+      }
+    },
+    {
+      "mode": "session-storage-blocked",
+      "state": {
+        "heading": "I build fast websites that turn visitors into customers.",
+        "headingVisible": true,
+        "skipCount": 0,
+        "introCount": 0,
+        "triggerCount": 11,
+        "bodyOpacity": "1"
+      }
+    },
+    {
+      "mode": "animation-throws",
+      "state": {
+        "heading": "I build fast websites that turn visitors into customers.",
+        "headingVisible": true,
+        "skipCount": 0,
+        "introCount": 0,
+        "triggerCount": 0,
+        "bodyOpacity": "1"
+      }
+    },
+    {
+      "mode": "intro-button-skip",
+      "passed": true
+    },
+    {
+      "mode": "intro-escape",
+      "passed": true
+    },
+    {
+      "mode": "intro-session-once",
+      "passed": true
+    }
+  ],
+  "noJavaScript": {
+    "bodyVisibility": "visible",
+    "bodyOpacity": "1",
+    "headlineVisible": true
+  }
+}
