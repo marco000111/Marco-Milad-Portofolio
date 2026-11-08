@@ -53,6 +53,7 @@ const ui = {
     resumeError: 'The CV could not be generated. Please try again.',
     projectConcept: 'Independent website concept',
     webApplication: 'Web application',
+    videoEditorPortfolio: 'Video Editor Portfolio / Creative Portfolio',
   },
   ar: {
     nav: ['الرئيسية', 'نبذة عني', 'السيرة الذاتية', 'المهارات', 'المشروعات', 'تواصل'],
@@ -106,6 +107,7 @@ const ui = {
     resumeError: 'تعذر إنشاء السيرة الذاتية. يرجى المحاولة مرة أخرى.',
     projectConcept: 'نموذج موقع تجريبي مستقل',
     webApplication: 'تطبيق ويب',
+    videoEditorPortfolio: 'موقع محرر فيديو / موقع إبداعي',
   },
 };
 
@@ -167,6 +169,24 @@ export function getPortfolio(language) {
       sourceUrl: '',
       language,
     })),
+    {
+      id: 'omar-editezzz',
+      title: 'Omar Editezzz',
+      category: 'Website',
+      type: ui[language].videoEditorPortfolio,
+      image: '/assets/images/omar-editezzz.png',
+      imageAlt: 'Omar Editezzz video editor portfolio homepage',
+      brief: language === 'ar'
+        ? 'موقع سينمائي حديث يقدّم أعمال عمر في المونتاج وسرد القصص البصري والحركة السلسة.'
+        : 'A modern cinematic portfolio shaped by video editing, visual storytelling, and smooth motion.',
+      description: language === 'ar'
+        ? 'موقع إبداعي حديث لعمر إديتز، صُمم حول مونتاج الفيديو وسرد القصص البصري والحركة السلسة والتجارب التفاعلية المميزة.'
+        : 'A modern cinematic portfolio website for Omar Editezzz, designed around video editing, visual storytelling, smooth motion, and a premium interactive experience.',
+      stack: [],
+      liveUrl: 'https://omar-editezz.vercel.app/',
+      sourceUrl: '',
+      language,
+    },
   ];
 
   return {
@@ -183,7 +203,7 @@ export const resumeFacts = {
   role: 'Front-end Developer & Graphic Designer',
   location: 'Egypt',
   email: 'marcomilad707@gmail.com',
-  phone: '+20 102 059 9210',
+  phone: '+20 122 792 5383',
   github: 'github.com/marco000111',
   instagram: 'instagram.com/designsby_marco_',
   summary:

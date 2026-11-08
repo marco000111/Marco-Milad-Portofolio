@@ -6,7 +6,7 @@ const socialLinks = [
   { key: 'github', href: 'https://github.com/marco000111', value: 'github.com/marco000111', Icon: Github },
   { key: 'instagram', href: 'https://instagram.com/designsby_marco_', value: '@designsby_marco_', Icon: Instagram },
   { key: 'email', href: 'mailto:marcomilad707@gmail.com', value: 'marcomilad707@gmail.com', Icon: Mail },
-  { key: 'whatsapp', href: 'https://wa.me/201020599210', value: '+20 102 059 9210', Icon: MessageCircle },
+  { key: 'whatsapp', href: 'https://wa.me/201227925383', value: '+20 122 792 5383', Icon: MessageCircle },
 ];
 
 export default function Contact({ ui, language }) {
@@ -40,7 +40,7 @@ export default function Contact({ ui, language }) {
     const body = language === 'ar'
       ? `الاسم: ${name}\nالبريد الإلكتروني: ${email}\n\n${message}`
       : `Name: ${name}\nEmail: ${email}\n\n${message}`;
-    const destination = `https://wa.me/201020599210?text=${encodeURIComponent(body)}`;
+    const destination = `https://wa.me/201227925383?text=${encodeURIComponent(body)}`;
     const newWindow = window.open(destination, '_blank');
     if (newWindow) {
       newWindow.opener = null;

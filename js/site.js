@@ -66,7 +66,7 @@ function render() {
   setHighlighted('headline', copy.hero, copy.heroHighlight);
   setText('intro', copy.intro);
   setText('hero-wa', copy.whatsapp);
-  $('#hero-wa').href = `https://wa.me/201020599210?text=${encodeURIComponent(language === 'ar' ? 'مرحبًا ماركو، أود التحدث عن مشروع موقع.' : 'Hi Marco, I’d like to discuss a website project.')}`;
+  $('#hero-wa').href = `https://wa.me/201227925383?text=${encodeURIComponent(language === 'ar' ? 'مرحبًا ماركو، أود التحدث عن مشروع موقع.' : 'Hi Marco, I’d like to discuss a website project.')}`;
   setText('work-cta', copy.seeWork);
   $('#trust').innerHTML = copy.trust.map((value) => `<li>${escapeHTML(value)}</li>`).join('');
   setText('preview-caption', copy.previewCaption);
@@ -107,7 +107,7 @@ function render() {
   form.elements.need.innerHTML = `<option value="">${escapeHTML(copy.choose)}</option>${copy.needs.map((value) => `<option value="${escapeHTML(value)}">${escapeHTML(value)}</option>`).join('')}`;
   form.elements.budget.innerHTML = `<option value="">${escapeHTML(copy.chooseBudget)}</option>${copy.budgets.map((value) => `<option value="${escapeHTML(value)}">${escapeHTML(value)}</option>`).join('')}`;
   $('#contact-cards').innerHTML = [
-    [copy.wa, '+20 102 059 9210', 'https://wa.me/201020599210', '201020599210'],
+    [copy.wa, '+20 122 792 5383', 'https://wa.me/201227925383', '201227925383'],
     [copy.email, 'marcomilad707@gmail.com', 'mailto:marcomilad707@gmail.com', 'marcomilad707@gmail.com'],
     [copy.instagram, '@designsby_marco_', 'https://instagram.com/designsby_marco_', '@designsby_marco_'],
   ].map(([label, value, url, copyValue]) => `<article class="contact-card"><strong>${escapeHTML(label)}</strong><bdi dir="ltr">${escapeHTML(value)}</bdi><button type="button" data-copy="${escapeHTML(copyValue)}" aria-label="${language === 'en' ? 'Copy' : 'نسخ'} ${escapeHTML(label)}">${escapeHTML(copy.copy)}</button><a href="${url}" target="${url.startsWith('http') ? '_blank' : '_self'}" rel="noopener noreferrer">${language === 'en' ? `Open ${escapeHTML(label)}` : `افتح ${escapeHTML(label)}`} <span aria-hidden="true">↗</span></a></article>`).join('');
@@ -163,7 +163,7 @@ $('#contact-form').addEventListener('submit', (event) => {
   const details = language === 'ar'
     ? `الاسم: ${name}\n${copy.need}: ${need}\n${copy.budget}: ${data.get('budget') || '—'}\n${copy.message}: ${message}`
     : `Name: ${name}\n${copy.need}: ${need}\n${copy.budget}: ${data.get('budget') || '—'}\n${copy.message}: ${message}`;
-  const target = `https://wa.me/201020599210?text=${encodeURIComponent(details)}`;
+  const target = `https://wa.me/201227925383?text=${encodeURIComponent(details)}`;
   const opened = window.open(target, '_blank', 'noopener');
   if (!opened) window.location.href = `mailto:marcomilad707@gmail.com?subject=${encodeURIComponent(need)}&body=${encodeURIComponent(details)}`;
 });
